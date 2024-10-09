@@ -1,23 +1,35 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import Navbar from './components/Navbar'; // Import Navbar component
+import Navbar from './components/Navbar';
+import Footer from './components/Footer'; // Assuming you have a common footer for all pages
 
 const App = () => {
+  const location = useLocation(); // Get the current path
+
   return (
-    <Router>
-      {/* Navbar is outside Routes, so it's rendered on all pages */}
-      <Navbar />
-      
+    <>
+      {/* Conditionally render Navbar only on the HomePage */}
+      {location.pathname === '/' && <Navbar />}
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
-    </Router>
-  );
-}
 
-export default App;
+      {/* Footer can be shown on all pages */}
+      <Footer />
+    </>
+  );
+};
+
+const AppWrapper = () => (
+  <Router>
+    <App />
+  </Router>
+);
+
+export default AppWrapper;

@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-scroll';
+import { Link as RouterLink } from 'react-router-dom';  // For routing to login page
 
 const Navbar = () => {
   return (
     <nav className="bg-white shadow-md">
-      <div className="container mx-auto">
-        <ul className="flex justify-center space-x-6 py-4 text-gray-800">
+      <div className="container mx-auto flex justify-between items-center py-4">
+        
+        {/* Left Section: Navigation Links */}
+        <ul className="ml-8 flex space-x-6 text-gray-800">
           <li>
             <Link 
               to="hero" 
@@ -47,6 +50,11 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
+
+        {/* Right Section: Login Button */}
+        <RouterLink to="/login" className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300 mr-10">
+          Login
+        </RouterLink>
       </div>
     </nav>
   );
