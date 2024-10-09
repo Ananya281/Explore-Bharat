@@ -24,3 +24,13 @@ form button {
   border: none;
   cursor: pointer;
 }
+
+#map {
+  height: 500px; /* or as per your requirement */
+  width: 100%;
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
