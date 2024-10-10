@@ -17,7 +17,7 @@ const HomePage = () => {
         <About />
       </section>
       
-      <section id="map">
+      <section id="map" style={{ width: "100vw", height: "80vh", paddingBottom: "20px", justifyContent: "center", alignItems: "center" }}>
         <Map />
       </section>
       
