@@ -41,8 +41,10 @@ form button {
   right: 10px;
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
-  padding: 10px;
+  padding: 10px; /* Reduce the padding to make the box smaller */
   border-radius: 5px;
+  font-size: 14px; /* You can adjust the font size to make the text smaller */
+  max-width: 250px; /* Optionally, set a max width for the box */
 }
 
 .map-container {
