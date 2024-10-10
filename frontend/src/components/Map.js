@@ -1,20 +1,27 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // For redirection
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-import indiaStates from "../india_states.json"; // path to your json file
+import indiaStates from "../india_states.json"; // Path to your GeoJSON file
 
 const MapChart = () => {
-  const [hoveredData, setHoveredData] = useState({ stateName: null, tagline: null }); // Store both state name and tagline
-  const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0 }); // Track mouse position
+  const [hoveredData, setHoveredData] = useState({ stateName: null, tagline: null });
+  const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0 });
+  const navigate = useNavigate(); // Hook to navigate programmatically
 
   const handleMouseEnter = (geo, evt) => {
-    const stateName = geo.properties.NAME_1; // Get the state name from the JSON file
-    const tagline = geo.properties.tagline;  // Get the tagline from JSON file
-    setHoveredData({ stateName, tagline });  // Set both stateName and tagline
-    setHoverPosition({ x: evt.clientX, y: evt.clientY }); // Set hover position based on mouse
+    const stateName = geo.properties.NAME_1;
+    const tagline = geo.properties.tagline;
+    setHoveredData({ stateName, tagline });
+    setHoverPosition({ x: evt.clientX, y: evt.clientY });
   };
 
   const handleMouseLeave = () => {
-    setHoveredData({ stateName: null, tagline: null }); // Clear hover data when mouse leaves
+    setHoveredData({ stateName: null, tagline: null });
+  };
+
+  const handleStateClick = (stateName) => {
+    // Redirect to the dynamic state info page
+    navigate(`/state/${stateName.replace(/\s+/g, '')}`); // Remove spaces in state names for URL
   };
 
   return (
@@ -22,8 +29,8 @@ const MapChart = () => {
       <ComposableMap
         projection="geoMercator"
         projectionConfig={{
-          scale: 1000, // Adjust as needed for the map size
-          center: [78.9629, 23.5937], // Center the map on India
+          scale: 1000,
+          center: [78.9629, 23.5937],
         }}
         style={{ width: "100%", height: "100%" }}
       >
@@ -34,27 +41,28 @@ const MapChart = () => {
                 key={geo.rsmKey}
                 geography={geo}
                 onMouseEnter={(evt) => handleMouseEnter(geo, evt)}
-                onMouseMove={(evt) => setHoverPosition({ x: evt.clientX, y: evt.clientY })} // Update position when moving within the state
+                onMouseMove={(evt) => setHoverPosition({ x: evt.clientX, y: evt.clientY })}
                 onMouseLeave={handleMouseLeave}
+                onClick={() => handleStateClick(geo.properties.NAME_1)} // Redirect on state click
                 style={{
                   default: {
-                    fill: "#D6D6DA",     // Default state fill color
-                    stroke: "black",      // Default black border
-                    strokeWidth: 1,       // Adjust for border thickness
-                    outline: "none"
+                    fill: "#D6D6DA",
+                    stroke: "black",
+                    strokeWidth: 1,
+                    outline: "none",
                   },
                   hover: {
-                    fill: "#F53",         // Only change fill on hover
-                    stroke: "black",      // Keep border black on hover
+                    fill: "#F53",
+                    stroke: "black",
                     strokeWidth: 1,
-                    outline: "none"
+                    outline: "none",
                   },
                   pressed: {
-                    fill: "#E42",         // Change fill on press
-                    stroke: "black",      // Keep border black on press
+                    fill: "#E42",
+                    stroke: "black",
                     strokeWidth: 1,
-                    outline: "none"
-                  }
+                    outline: "none",
+                  },
                 }}
               />
             ))
@@ -62,23 +70,22 @@ const MapChart = () => {
         </Geographies>
       </ComposableMap>
 
-      {/* Show tooltip with both the state name and tagline when hovering over a state */}
       {hoveredData.stateName && (
         <div
           className="hover-info"
           style={{
             position: "absolute",
-            top: hoverPosition.y + 20, // Position the tooltip slightly below the mouse
-            left: hoverPosition.x + 20, // Position the tooltip slightly right of the mouse
+            top: hoverPosition.y + 20,
+            left: hoverPosition.x + 20,
             backgroundColor: "rgba(0, 0, 0, 0.7)",
             color: "#fff",
             padding: "10px",
             borderRadius: "5px",
-            pointerEvents: "none", // Ensure the tooltip doesn't interfere with mouse events
+            pointerEvents: "none",
           }}
         >
           <h4>{hoveredData.stateName}</h4>
-          <p>{hoveredData.tagline || "No tagline available"}</p> {/* Display the tagline */}
+          <p>{hoveredData.tagline || "No tagline available"}</p>
         </div>
       )}
     </div>
