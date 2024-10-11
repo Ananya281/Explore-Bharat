@@ -1,27 +1,53 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // For redirection
+import { useNavigate } from "react-router-dom";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-import indiaStates from "../india_states.json"; // Path to your GeoJSON file
+import indiaStates from "../india_states.json";
+
+// Manually import all images
+import biharImage from "../assets/images/states-map/bihar.jpeg";
+import gujratImage from "../assets/images/states-map/gujrat.jpg";
+import maharashtraImage from "../assets/images/states-map/maharashtra.jpeg";
+import keralaImage from "../assets/images/states-map/kerela.jpeg";
+// Add all the other imports here
+
+// Create an image mapping object
+const imageMapping = {
+  bihar: biharImage,
+  gujrat: gujratImage,
+  maharashtra: maharashtraImage,
+  kerala: keralaImage,
+  // Map other states here
+};
 
 const MapChart = () => {
-  const [hoveredData, setHoveredData] = useState({ stateName: null, tagline: null });
+  const [hoveredData, setHoveredData] = useState({
+    stateName: null,
+    tagline: null,
+    imageUrl: null,
+  });
   const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0 });
-  const navigate = useNavigate(); // Hook to navigate programmatically
+  const navigate = useNavigate();
 
   const handleMouseEnter = (geo, evt) => {
     const stateName = geo.properties.NAME_1;
     const tagline = geo.properties.tagline;
-    setHoveredData({ stateName, tagline });
+    const imageName = geo.properties.imageName; // Get imageName from JSON
+
+    // Resolve the image URL using the image mapping
+    const imageUrl = imageMapping[imageName] || null;
+
+    console.log(`Image for ${stateName}:`, imageUrl);
+
+    setHoveredData({ stateName, tagline, imageUrl });
     setHoverPosition({ x: evt.clientX, y: evt.clientY });
   };
 
   const handleMouseLeave = () => {
-    setHoveredData({ stateName: null, tagline: null });
+    setHoveredData({ stateName: null, tagline: null, imageUrl: null });
   };
 
   const handleStateClick = (stateName) => {
-    // Redirect to the dynamic state info page
-    navigate(`/state/${stateName.replace(/\s+/g, '')}`); // Remove spaces in state names for URL
+    navigate(`/state/${stateName.replace(/\s+/g, "")}`);
   };
 
   return (
@@ -43,7 +69,7 @@ const MapChart = () => {
                 onMouseEnter={(evt) => handleMouseEnter(geo, evt)}
                 onMouseMove={(evt) => setHoverPosition({ x: evt.clientX, y: evt.clientY })}
                 onMouseLeave={handleMouseLeave}
-                onClick={() => handleStateClick(geo.properties.NAME_1)} // Redirect on state click
+                onClick={() => handleStateClick(geo.properties.NAME_1)}
                 style={{
                   default: {
                     fill: "#D6D6DA",
@@ -82,10 +108,29 @@ const MapChart = () => {
             padding: "10px",
             borderRadius: "5px",
             pointerEvents: "none",
+            display: "flex", // To position the image and text next to each other
+            gap: "10px",
+            alignItems: "center", // Align items vertically
           }}
         >
-          <h4>{hoveredData.stateName}</h4>
-          <p>{hoveredData.tagline || "No tagline available"}</p>
+          <div>
+            <h4>{hoveredData.stateName}</h4>
+            <p>{hoveredData.tagline || "No tagline available"}</p>
+          </div>
+          {hoveredData.imageUrl ? (
+            <img
+              src={hoveredData.imageUrl}
+              alt={hoveredData.stateName}
+              style={{
+                width: "50px",
+                height: "50px",
+                borderRadius: "50%", // Makes the image circular
+                objectFit: "cover", // Ensures the image fits well inside the circle
+              }}
+            />
+          ) : (
+            <p>No image available</p>
+          )}
         </div>
       )}
     </div>
