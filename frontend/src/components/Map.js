@@ -4,18 +4,80 @@ import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import indiaStates from "../india_states.json";
 
 // Manually import all images
+import andamanImage from "../assets/images/states-map/andaman.jpeg";
+import andhrapradeshImage from "../assets/images/states-map/andhrapradesh.webp";
+import arunachalpradeshImage from "../assets/images/states-map/arunachalpradesh.jpg";
+import assamImage from "../assets/images/states-map/assam.webp";
 import biharImage from "../assets/images/states-map/bihar.jpeg";
-import gujratImage from "../assets/images/states-map/gujrat.jpg";
-import maharashtraImage from "../assets/images/states-map/maharashtra.jpeg";
+import chandigarhImage from "../assets/images/states-map/chandigarh.jpeg";
+import chattisgarhImage from "../assets/images/states-map/chattisgarh.jpeg";
+import dadraandnagarImage from "../assets/images/states-map/dadraandnagar.jpeg";
+import damandiuImage from "../assets/images/states-map/damandiu.png";
+import delhiImage from "../assets/images/states-map/delhi.avif";
+import goaImage from "../assets/images/states-map/goa.jpeg";
+import gujaratImage from "../assets/images/states-map/gujarat.jpg";
+import haryanaImage from "../assets/images/states-map/haryana.jpg";
+import himachalImage from "../assets/images/states-map/himachal.jpeg";
+import jharkhandImage from "../assets/images/states-map/jharkhand.webp";
+import jkImage from "../assets/images/states-map/jk.jpeg";
+import KarnatakaImage from "../assets/images/states-map/Karnataka.webp";
 import keralaImage from "../assets/images/states-map/kerela.jpeg";
+import lakshdweepImage from "../assets/images/states-map/lakshdweep.jpeg";
+import maharashtraImage from "../assets/images/states-map/maharashtra.jpg";
+import manipurImage from "../assets/images/states-map/manipur.jpg";
+import meghalayaImage from "../assets/images/states-map/meghalaya.jpg";
+import mizoramImage from "../assets/images/states-map/mizoram.avif";
+import mpImage from "../assets/images/states-map/mp.jpeg";
+import nagalandImage from "../assets/images/states-map/nagaland.jpeg";
+import orrisaImage from "../assets/images/states-map/orissa.jpeg";
+import puducheryImage from "../assets/images/states-map/puduchery.jpeg";
+import punjabImage from "../assets/images/states-map/punjab.jpg";
+import rajasthanImage from "../assets/images/states-map/rajasthan.jpeg";
+import sikkimImage from "../assets/images/states-map/sikkim.jpeg";
+import tamilnaduImage from "../assets/images/states-map/tamilnadu.jpeg";
+import tripuraImage from "../assets/images/states-map/tripura.jpg";
+import upImage from "../assets/images/states-map/up.jpeg";
+import uttarakhandImage from "../assets/images/states-map/uttarakhand.jpg";
+import westbengalImage from "../assets/images/states-map/westbengal.jpg";
 // Add all the other imports here
 
 // Create an image mapping object
 const imageMapping = {
+  andaman: andamanImage,
+  andhrapradesh: andhrapradeshImage,
+  arunachalpradesh: arunachalpradeshImage,
+  assam: assamImage,
   bihar: biharImage,
-  gujrat: gujratImage,
-  maharashtra: maharashtraImage,
+  chandigarh: chandigarhImage,
+  chattisgarh: chattisgarhImage,
+  dadraandnagar: dadraandnagarImage,
+  damandiu: damandiuImage,
+  delhi: delhiImage,
+  goa: goaImage,
+  gujarat: gujaratImage,
+  haryana: haryanaImage,
+  himachal: himachalImage,
+  jharkhand: jharkhandImage,
+  jk: jkImage,
+  Karnataka: KarnatakaImage,
   kerala: keralaImage,
+  lakshdweep: lakshdweepImage,
+  maharashtra: maharashtraImage,
+  manipur: manipurImage,
+  meghalaya: meghalayaImage,
+  mizoram: mizoramImage,
+  mp: mpImage,
+  nagaland: nagalandImage,
+  orrisa: orrisaImage,
+  puduchery: puducheryImage,
+  punjab: punjabImage,
+  rajasthan: rajasthanImage,
+  sikkim: sikkimImage,
+  tamilnadu: tamilnaduImage,
+  tripura: tripuraImage,
+  up: upImage,
+  uttarakhand: uttarakhandImage,
+  westbengal: westbengalImage,
   // Map other states here
 };
 

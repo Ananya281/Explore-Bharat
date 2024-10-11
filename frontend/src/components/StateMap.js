@@ -20,8 +20,8 @@ const getStateProjectionConfig = (stateName) => {
           return { scale: 150000, center: [76.7794, 30.7333] };
     case "chhattisgarh":
           return { scale: 4500, center: [81.8661, 21] };
-    case "dadra and nagar haveli":
-          return { scale: 8000, center: [73.0169, 20.1809] };
+    case "dadraandnagarhaveli":
+          return { scale: 38000, center: [73.0169, 20.1809] };
     case "daman and diu":
           return { scale: 8000, center: [72.8397, 20.3974] };
     case "delhi":
