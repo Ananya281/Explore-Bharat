@@ -21,7 +21,7 @@ import himachalImage from "../assets/images/states-map/himachal.jpeg";
 import jharkhandImage from "../assets/images/states-map/jharkhand.webp";
 import jkImage from "../assets/images/states-map/jk.jpeg";
 import KarnatakaImage from "../assets/images/states-map/Karnataka.webp";
-import keralaImage from "../assets/images/states-map/kerela.jpeg";
+import kerelaImage from "../assets/images/states-map/kerela.jpeg";
 import lakshdweepImage from "../assets/images/states-map/lakshdweep.jpeg";
 import maharashtraImage from "../assets/images/states-map/maharashtra.jpg";
 import manipurImage from "../assets/images/states-map/manipur.jpg";
@@ -29,7 +29,7 @@ import meghalayaImage from "../assets/images/states-map/meghalaya.jpg";
 import mizoramImage from "../assets/images/states-map/mizoram.avif";
 import mpImage from "../assets/images/states-map/mp.jpeg";
 import nagalandImage from "../assets/images/states-map/nagaland.jpeg";
-import orrisaImage from "../assets/images/states-map/orissa.jpeg";
+import orissaImage from "../assets/images/states-map/orissa.jpeg";
 import puducheryImage from "../assets/images/states-map/puduchery.jpeg";
 import punjabImage from "../assets/images/states-map/punjab.jpg";
 import rajasthanImage from "../assets/images/states-map/rajasthan.jpeg";
@@ -60,7 +60,7 @@ const imageMapping = {
   jharkhand: jharkhandImage,
   jk: jkImage,
   Karnataka: KarnatakaImage,
-  kerala: keralaImage,
+  kerela: kerelaImage,
   lakshdweep: lakshdweepImage,
   maharashtra: maharashtraImage,
   manipur: manipurImage,
@@ -68,7 +68,7 @@ const imageMapping = {
   mizoram: mizoramImage,
   mp: mpImage,
   nagaland: nagalandImage,
-  orrisa: orrisaImage,
+  orissa: orissaImage,
   puduchery: puducheryImage,
   punjab: punjabImage,
   rajasthan: rajasthanImage,
