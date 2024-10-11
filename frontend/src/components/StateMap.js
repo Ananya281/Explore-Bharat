@@ -6,80 +6,80 @@ import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 // A function to adjust projection based on the state
 const getStateProjectionConfig = (stateName) => {
   switch (stateName.toLowerCase()) {
-    case "rajasthan":
-      return { scale: 2500, center: [75.78, 27.0238] };
-    case "gujarat":
-      return { scale: 3000, center: [71.19, 22.2587] };
-    case "maharashtra":
-      return { scale: 3000, center: [75.7139, 19.7515] };
-    case "uttar pradesh":
-      return { scale: 3000, center: [80.9462, 26.8467] };
-    case "bihar":
-      return { scale: 3500, center: [85.3131, 25.0961] };
-    case "west bengal":
-      return { scale: 3500, center: [88.3639, 22.5726] };
-    case "madhya pradesh":
-      return { scale: 3000, center: [78.6569, 23.1815] };
-    case "tamil nadu":
-      return { scale: 3000, center: [78.6569, 11.1271] };
-    case "karnataka":
-      return { scale: 3000, center: [75.7139, 15.3173] };
-    case "andhra pradesh":
-      return { scale: 3000, center: [80.019, 15.9129] };
-    case "odisha":
-      return { scale: 3500, center: [85.0985, 20.9517] };
-    case "telangana":
-      return { scale: 3500, center: [79.0193, 17.9784] };
-    case "kerala":
-      return { scale: 4000, center: [76.2711, 10.8505] };
+    case "andamanandnicobar":
+          return { scale: 4000, center: [92.6586, 10.5] };
+    case "andhrapradesh":
+          return { scale: 4000, center: [80.019, 16] };   
+    case "arunachalpradesh":
+          return { scale: 7000, center: [94.7278, 28] };
     case "assam":
-      return { scale: 3500, center: [92.9376, 26.2006] };
-    case "punjab":
-      return { scale: 3500, center: [75.3412, 31.1471] };
-    case "haryana":
-      return { scale: 3500, center: [76.0856, 29.0588] };
-    case "chhattisgarh":
-      return { scale: 3000, center: [81.8661, 21.2787] };
-    case "jharkhand":
-      return { scale: 3500, center: [85.2799, 23.6102] };
-    case "uttarakhand":
-      return { scale: 3500, center: [79.0193, 30.0668] };
-    case "himachal pradesh":
-      return { scale: 4000, center: [77.1734, 31.1048] };
-    case "tripura":
-      return { scale: 5000, center: [91.9882, 23.9408] };
-    case "meghalaya":
-      return { scale: 5000, center: [91.3662, 25.4670] };
-    case "manipur":
-      return { scale: 5000, center: [93.9063, 24.6637] };
-    case "nagaland":
-      return { scale: 5000, center: [94.5624, 26.1584] };
-    case "mizoram":
-      return { scale: 5000, center: [92.9376, 23.1645] };
-    case "arunachal pradesh":
-      return { scale: 3000, center: [94.7278, 28.2180] };
-    case "sikkim":
-      return { scale: 5500, center: [88.5122, 27.5330] };
-    case "goa":
-      return { scale: 7000, center: [74.1240, 15.2993] };
-    case "delhi":
-      return { scale: 5000, center: [77.1025, 28.7041] };
-    case "puducherry":
-      return { scale: 5000, center: [79.8083, 11.9416] };
-    case "lakshadweep":
-      return { scale: 8000, center: [72.6394, 10.5667] };
-    case "andaman and nicobar islands":
-      return { scale: 2500, center: [92.6586, 11.7401] };
-    case "ladakh":
-      return { scale: 2500, center: [78.9634, 34.2268] };
-    case "jammu and kashmir":
-      return { scale: 2500, center: [75.3412, 34.0837] };
+          return { scale: 6000, center: [92.9376, 26] };
+    case "bihar":
+          return { scale: 6000, center: [85.3131, 25.9] };
     case "chandigarh":
-      return { scale: 8000, center: [76.7794, 30.7333] };
-    case "daman and diu":
-      return { scale: 8000, center: [72.8397, 20.3974] };
+          return { scale: 150000, center: [76.7794, 30.7333] };
+    case "chhattisgarh":
+          return { scale: 4500, center: [81.8661, 21] };
     case "dadra and nagar haveli":
-      return { scale: 8000, center: [73.0169, 20.1809] };
+          return { scale: 8000, center: [73.0169, 20.1809] };
+    case "daman and diu":
+          return { scale: 8000, center: [72.8397, 20.3974] };
+    case "delhi":
+          return { scale: 50000, center: [77.1025, 28.65] };
+    case "goa":
+          return { scale: 23000, center: [74, 15.2993] };
+    case "gujarat":
+          return { scale: 5000, center: [71.19, 22.2587] };
+    case "haryana":
+          return { scale: 7000, center: [76.0856, 29.3] };
+    case "himachalpradesh":
+          return { scale: 6700, center: [77.1734, 31.7] };
+    case "jammuandkashmir":
+          return { scale: 7000, center: [74.9, 33.7] };
+    case "jharkhand":
+          return { scale: 7000, center: [85.2799, 23.6102] };
+    case "karnataka":
+          return { scale: 4000, center: [75.7139, 15.1] };
+    case "kerala":
+          return { scale: 5500, center: [76.2711, 10.4] };
+    case "ladakh":
+          return { scale: 2500, center: [78.9634, 34.2268] };
+    case "lakshadweep":
+          return { scale: 20000, center: [72.9, 10.5667] };
+    case "madhyapradesh":
+          return { scale: 4000, center: [77.6, 23.8] };
+    case "maharashtra":
+          return { scale: 4000, center: [75.7139, 18.8] };
+    case "manipur":
+          return { scale: 10000, center: [93.9063, 24.6637] };
+    case "meghalaya":
+          return { scale: 10000, center: [91.3, 25.4670] };
+    case "mizoram":
+          return { scale: 8000, center: [92.9376, 23.1645] };
+    case "nagaland":
+          return { scale: 10000, center: [94.5624, 26] };
+    case "orissa":
+          return { scale: 5000, center: [84, 20] };
+    case "puducherry":
+          return { scale: 20000, center: [79.8083, 11.4] };
+    case "punjab":
+          return { scale: 7400, center: [75.3412, 31] };
+    case "rajasthan":
+          return { scale: 3700, center: [73.78, 26.7] };
+    case "sikkim":
+          return { scale: 11000, center: [88.5122, 27.5330] };
+    case "tamilnadu":
+          return { scale: 5000, center: [78.6569, 10.9] };
+    case "telangana":
+          return { scale: 3500, center: [79.0193, 17.9784] };
+    case "tripura":
+          return { scale: 15000, center: [91.8, 23.7] };
+    case "uttarpradesh":
+          return { scale: 4100, center: [80.2, 27] };
+    case "uttarakhand":
+          return { scale: 7000, center: [79.0193, 30.0668] };
+    case "westbengal":
+          return { scale: 4200, center: [88.3639, 24.2] };
     default:
       return { scale: 2500, center: [78.9629, 20.5937] }; // Default center for India
   }
