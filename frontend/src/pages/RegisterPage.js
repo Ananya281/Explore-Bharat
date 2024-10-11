@@ -7,14 +7,41 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle registration logic here
-    console.log('First Name:', firstName);
-    console.log('Last Name:', lastName);
-    console.log('Email:', email);
-    console.log('Password:', password);
-  };
+  
+    const userData = {
+      firstName,
+      lastName,
+      email,
+      password
+    };
+  
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        console.log('User registered successfully:', data);
+        // You could display a success message or redirect to login
+      } else {
+        console.error('Error registering user:', data.message);
+        // Show the error message in the UI
+        alert(data.message); // Example: Alert the "User already exists" message
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };  
+  
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -28,14 +55,6 @@ const RegisterPage = () => {
         >
           <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="Google" className="w-5 h-5 mr-2" />
           Sign up with Google
-        </button>
-
-        <button
-          type="button"
-          className="w-full mb-4 bg-white border border-gray-300 text-gray-800 p-3 rounded-lg flex items-center justify-center hover:bg-gray-100"
-        >
-          <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="Facebook" className="w-5 h-5 mr-2" />
-          Sign up with Facebook
         </button>
 
         <div className="text-center text-gray-500 my-4">OR</div>
