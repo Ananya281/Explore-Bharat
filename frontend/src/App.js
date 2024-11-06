@@ -12,9 +12,13 @@ import Footer from './components/Footer';
 const App = () => {
   const location = useLocation(); // Get the current path
 
+  // Define the paths where the Navbar should be displayed
+  const navbarPaths = ['/', '/login', '/register'];
+
   return (
     <>
-      {location.pathname === '/' && <Navbar />}
+      {/* Conditionally render Navbar based on the current path */}
+      {navbarPaths.includes(location.pathname) && <Navbar />}
 
       <Routes>
         <Route path="/" element={<HomePage />} />

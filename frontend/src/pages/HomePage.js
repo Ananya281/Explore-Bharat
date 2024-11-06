@@ -2,7 +2,6 @@ import React from 'react';
 import Hero from '../components/Hero';
 import Map from '../components/Map';
 import About from '../components/About';
-import Testimonial from '../components/Testimonial';
 import Contact from '../components/Contact';
 import Feedback from '../components/Feedback';
 
