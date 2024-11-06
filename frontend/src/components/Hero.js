@@ -1,22 +1,42 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const navigate = useNavigate();
 
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
+  const handleImageUpload = (e) => {
+    setUploadedImage(e.target.files[0]);
   };
 
-  const handleSearchSubmit = (e) => {
+  const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    console.log('Search query:', searchQuery);
+    if (uploadedImage) {
+      const formData = new FormData();
+      formData.append('file', uploadedImage);
+
+      try {
+        const response = await axios.post('http://localhost:5000/predict', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+        const predictedClass = response.data.predicted_class;
+
+        // Navigate to TourismPage with the predicted class
+        navigate('/tourism', { state: { predictedClass } });
+      } catch (error) {
+        console.error("Prediction error:", error);
+      }
+    } else {
+      // If no image is uploaded, still redirect to TourismPage without prediction data
+      navigate('/tourism');
+    }
   };
 
   return (
     <section 
       className="relative w-full h-screen flex items-center justify-center overflow-hidden"
-      >
-     
+    >
       {/* Background YouTube Video in Hero Section */}
       <iframe
         title="Explore Bharat Background Video"
@@ -35,18 +55,16 @@ const Hero = () => {
         <h1 className="text-4xl font-bold">Welcome to Explore Bharat</h1>
         <p className="mt-4">Discover India's rich cultural diversity</p>
         
-        {/* Search Bar */}
-        <form onSubmit={handleSearchSubmit} className="mt-8 flex justify-center">
+        {/* Image Upload and Submit Button */}
+        <form onSubmit={handleSearchSubmit} className="mt-8 flex flex-col items-center">
           <input 
-            type="text" 
-            className="px-4 py-3 w-1/2 max-w-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
-            placeholder="Search for cultural heritage, monuments, festivals..."
-            value={searchQuery}
-            onChange={handleSearchChange}
+            type="file" 
+            onChange={handleImageUpload} 
+            className="mb-4"
           />
           <button 
             type="submit" 
-            className="ml-4 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
+            className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
           >
             Search
           </button>
@@ -69,6 +87,6 @@ const Hero = () => {
       </div>
     </section>
   );
-}
+};
 
 export default Hero;

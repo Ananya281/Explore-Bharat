@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import StateInfoPage from './pages/StateInfoPage';  // Your dynamic state info page
+import TourismPage from './pages/TourismPage';
+import StateInfoPage from './pages/StateInfoPage'; // Your dynamic state info page
 import Navbar from './components/Navbar';
 import Footer from './components/Footer'; 
 
@@ -26,13 +27,16 @@ const App = () => {
         <Route path="/register" element={<RegisterPage />} />
         {/* Dynamic route for state information */}
         <Route path="/state/:stateName" element={<StateInfoPage />} /> 
+        <Route path="/tourism" element={<TourismPage />} />
       </Routes>
 
+      {/* Always render Footer */}
       <Footer />
     </>
   );
 };
 
+// Wrap App component in Router
 const AppWrapper = () => (
   <Router>
     <App />
