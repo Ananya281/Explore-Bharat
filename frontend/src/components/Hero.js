@@ -17,10 +17,13 @@ const Hero = () => {
       formData.append('file', uploadedImage);
 
       try {
-        const response = await axios.post('http://localhost:5000/predict', formData, {
+        const response = await axios.post('http://127.0.0.1:5000/predict', formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
         const predictedClass = response.data.predicted_class;
+
+        // Log the predicted class to verify the response from the backend
+      console.log("Predicted Class:", predictedClass);
 
         // Navigate to TourismPage with the predicted class
         navigate('/tourism', { state: { predictedClass } });

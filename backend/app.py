@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from PIL import Image
 import tensorflow as tf
 import numpy as np
 import io
 
 app = Flask(__name__)
+CORS(app)
 
 # Load the model once when the app starts
 model = tf.keras.models.load_model('trained_model.keras')
