@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import backgroundVideo from '../assets/videos/Welcome to India.mp4'; // Adjust the path if necessary
 
 const Hero = () => {
   const [uploadedImage, setUploadedImage] = useState(null);
-  const [loading, setLoading] = useState(false); // Loading state
-  const [error, setError] = useState(null); // Error state
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file && file.type.startsWith('image/')) {
-      // Only set the file if it is an image
       setUploadedImage(file);
-      setError(null); // Reset error if any
+      setError(null);
     } else {
       setError("Please upload a valid image file.");
     }
@@ -24,8 +24,8 @@ const Hero = () => {
     if (uploadedImage) {
       const formData = new FormData();
       formData.append('file', uploadedImage);
-      setLoading(true); // Set loading state
-      setError(null); // Reset any previous errors
+      setLoading(true);
+      setError(null);
 
       try {
         const response = await axios.post('http://127.0.0.1:5000/predict', formData, {
@@ -33,19 +33,15 @@ const Hero = () => {
         });
         const predictedClass = response.data.predicted_class;
 
-        // Log the predicted class to verify the response from the backend
         console.log("Predicted Class:", predictedClass);
-
-        // Navigate to TourismPage with the predicted class
         navigate('/tourism', { state: { predictedClass } });
       } catch (error) {
         console.error("Prediction error:", error);
         setError("Failed to get prediction. Please try again.");
       } finally {
-        setLoading(false); // Reset loading state
+        setLoading(false);
       }
     } else {
-      // If no image is uploaded, still redirect to TourismPage without prediction data
       navigate('/tourism');
     }
   };
@@ -54,15 +50,16 @@ const Hero = () => {
     <section 
       className="relative w-full h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background YouTube Video in Hero Section */}
-      <iframe
-        title="Explore Bharat Background Video"
-        src="https://www.youtube.com/embed/35npVaFGHMY?autoplay=1&mute=1&loop=1&playlist=35npVaFGHMY&controls=0&showinfo=0&modestbranding=1"
-        className="absolute top-0 left-0 w-screen h-screen z-[-1]"
-        frameBorder="0"
-        allow="autoplay; loop; encrypted-media"
-        allowFullScreen
-      ></iframe>
+      {/* Background Video in Hero Section */}
+      <video
+        autoPlay
+        loop
+        muted
+        className="absolute top-0 left-0 w-screen h-screen object-cover z-[-1]"
+      >
+        <source src={backgroundVideo} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
       {/* Overlay for readability */}
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
@@ -99,7 +96,7 @@ const Hero = () => {
           preserveAspectRatio="none"
         >
           <path
-            d="M0,60 C100,90 200,30 300,60 C400,90 500,30 600,60 C700,90 800,30 900,60 C1000,90 1100,30 1200,60 L1200,120 L0,120 Z"
+            d="M0,8 C100,48 200,-12 300,8 C400,58 500,-12 600,8 C700,48 800,-12 900,8 C1000,48 1100,-12 1200,8 L1200,120 L0,120 Z"
             className="fill-current text-white"
           ></path>
         </svg>
