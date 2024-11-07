@@ -13,8 +13,8 @@ import Footer from './components/Footer';
 const App = () => {
   const location = useLocation(); // Get the current path
 
-  // Define the paths where the Navbar should be displayed
-  const navbarPaths = ['/', '/login', '/register'];
+  // Define the path where the Navbar should be displayed (only Home Page)
+  const navbarPaths = ['/'];
 
   return (
     <>

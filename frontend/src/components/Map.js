@@ -113,7 +113,7 @@ const MapChart = () => {
   };
 
   return (
-    <div className="map-container" style={{ position: "relative" }}>
+    <div className="map-container" style={{ position: "relative", backgroundColor: "#fdf7f2", padding: "10px"}}>
       <ComposableMap
         projection="geoMercator"
         projectionConfig={{
@@ -165,14 +165,15 @@ const MapChart = () => {
             position: "absolute",
             top: hoverPosition.y + 20,
             left: hoverPosition.x + 20,
-            backgroundColor: "rgba(0, 0, 0, 0.7)",
-            color: "#fff",
+            backgroundColor: "#fdf7f2",
+            color: "#333",
             padding: "10px",
             borderRadius: "5px",
             pointerEvents: "none",
             display: "flex", // To position the image and text next to each other
             gap: "10px",
             alignItems: "center", // Align items vertically
+            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)", // Add subtle shadow for readability
           }}
         >
           <div>
