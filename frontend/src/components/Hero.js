@@ -4,10 +4,19 @@ import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
   const [uploadedImage, setUploadedImage] = useState(null);
+  const [loading, setLoading] = useState(false); // Loading state
+  const [error, setError] = useState(null); // Error state
   const navigate = useNavigate();
 
   const handleImageUpload = (e) => {
-    setUploadedImage(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      // Only set the file if it is an image
+      setUploadedImage(file);
+      setError(null); // Reset error if any
+    } else {
+      setError("Please upload a valid image file.");
+    }
   };
 
   const handleSearchSubmit = async (e) => {
@@ -15,6 +24,8 @@ const Hero = () => {
     if (uploadedImage) {
       const formData = new FormData();
       formData.append('file', uploadedImage);
+      setLoading(true); // Set loading state
+      setError(null); // Reset any previous errors
 
       try {
         const response = await axios.post('http://127.0.0.1:5000/predict', formData, {
@@ -23,12 +34,15 @@ const Hero = () => {
         const predictedClass = response.data.predicted_class;
 
         // Log the predicted class to verify the response from the backend
-      console.log("Predicted Class:", predictedClass);
+        console.log("Predicted Class:", predictedClass);
 
         // Navigate to TourismPage with the predicted class
         navigate('/tourism', { state: { predictedClass } });
       } catch (error) {
         console.error("Prediction error:", error);
+        setError("Failed to get prediction. Please try again.");
+      } finally {
+        setLoading(false); // Reset loading state
       }
     } else {
       // If no image is uploaded, still redirect to TourismPage without prediction data
@@ -65,11 +79,13 @@ const Hero = () => {
             onChange={handleImageUpload} 
             className="mb-4"
           />
+          {error && <p className="text-red-500">{error}</p>} {/* Error message */}
           <button 
             type="submit" 
             className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
+            disabled={loading} // Disable button while loading
           >
-            Search
+            {loading ? 'Processing...' : 'Search'}
           </button>
         </form>
       </div>

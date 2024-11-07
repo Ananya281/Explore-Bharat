@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
 from PIL import Image
 import tensorflow as tf
 import numpy as np
 import io
 
 app = Flask(__name__)
+CORS(app) 
 
 # Load the model once when the app starts
 model = tf.keras.models.load_model('trained_model.keras')
@@ -273,14 +275,19 @@ class_name=['24 Avatars',
  'siddhanath temple']
 
 def predict_image(image):
-    # Preprocess the image to match the model's expected input
-    image = image.resize((64, 64))  # Resize image to model input size
-    input_arr = tf.keras.preprocessing.image.img_to_array(image)
-    input_arr = np.array([input_arr])  # Convert single image to batch
-    input_arr = input_arr / 255.0  # Normalize if required by your model
-    prediction = model.predict(input_arr)
-    result_index = np.argmax(prediction)
-    return int(result_index)
+    try:
+        # Preprocess the image to match the model's expected input
+        image = image.resize((64, 64))  # Resize image to model input size
+        input_arr = tf.keras.preprocessing.image.img_to_array(image)
+        input_arr = np.array([input_arr])  # Convert single image to batch
+
+        # Get the model prediction
+        prediction = model.predict(input_arr)
+        result_index = np.argmax(prediction)
+        return result_index
+    except Exception as e:
+        print(f"Error in prediction: {e}")
+        return None
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -288,12 +295,22 @@ def predict():
         return jsonify({"error": "No file provided"}), 400
 
     file = request.files['file']
-    image = Image.open(file.stream)  # Open the image file from the request
-    result_index = predict_image(image)  # Get the prediction result
+    try:
+        # Open and process the image
+        image = Image.open(file.stream)
+        result_index = predict_image(image)
+        
+        # Handle prediction errors
+        if result_index is None:
+            return jsonify({"error": "Prediction failed"}), 500
 
-    predicted_class_name = class_name[result_index]  # Get the class name from the index
-
-    return jsonify({"predicted_class": predicted_class_name})
+        # Get the predicted class name
+        predicted_class_name = class_name[result_index]
+        
+        return jsonify({"predicted_class": predicted_class_name})
+    
+    except Exception as e:
+        return jsonify({"error": f"Error processing image: {e}"}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
