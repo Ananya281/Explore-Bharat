@@ -1,0 +1,35 @@
+.architecture-design-section {
+  padding: 40px;
+  margin: 20px auto;
+  max-width: 800px;
+  background-color: #f0f0f0; /* Lighter background for a refined look */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.architecture-design-title {
+  font-size: 2rem;
+  color: #444; /* Darker color for title text */
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+  position: relative;
+}
+
+.architecture-design-title::after {
+  content: '';
+  display: block;
+  width: 70px;
+  height: 3px;
+  background-color: #4CAF50; /* Accent color for architecture theme */
+  margin: 8px auto 0;
+  border-radius: 4px;
+}
+
+.architecture-design-content {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #666; /* Slightly darker for better readability */
+  text-align: justify;
+  padding: 10px 20px;
+}

@@ -1,35 +1,22 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import Welcome from '../components/Welcome';
+import History from '../components/History';
+import ArchitectureAndDesign from '../components/ArchitectureDesign';
+import PlacesToVisit from '../components/PlacesToVisit';
 
 const TourismPage = () => {
   const location = useLocation();
-  const predictedClass = location.state?.predictedClass;
+  const predictedClass = location.state?.predictedClass || "Unknown Place";
 
-  const renderTourismInfo = () => {
-    switch (predictedClass) {
-      case 0:
-        return <p>This is information about Monument A.</p>;
-      case 1:
-        return <p>This is information about Monument B.</p>;
-      case 2:
-        return <p>This is information about Monument C.</p>;
-      // Add more cases based on the possible classes and respective information
-      default:
-        return <p>No specific information available for this prediction.</p>;
-    }
-  };
+  console.log("Received Predicted Class in TourismPage:", predictedClass);
 
   return (
-    <div>
-      <h1>Tourism Information</h1>
-      {predictedClass !== undefined ? (
-        <div>
-          <p>Predicted Class: {predictedClass}</p>
-          {renderTourismInfo()}
-        </div>
-      ) : (
-        <p>No prediction data available</p>
-      )}
+    <div className="tourism-page">
+      <Welcome placeName={predictedClass} />
+      <History placeName={predictedClass} />
+      <ArchitectureAndDesign placeName={predictedClass} />
+      <PlacesToVisit placeName={predictedClass} />
     </div>
   );
 };

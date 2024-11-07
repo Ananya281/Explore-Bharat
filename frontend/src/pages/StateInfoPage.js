@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import HeroState from '../components/HeroState';
 import History from '../components/History';
 import CultureTradition from '../components/CultureTradition';
-import MusicArts from '../components/MusicArts';
+import MusicArts from '../components/ArchitectureDesign';
 import Weather from '../components/Weather';
 import PlacesToVisit from '../components/PlacesToVisit';
 import Cuisine from '../components/Cuisine';
