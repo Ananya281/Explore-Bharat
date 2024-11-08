@@ -98,15 +98,22 @@ const Hero = () => {
             placeholder="Search for a place, monument, or cultural element..." 
             value={textSearch} 
             onChange={(e) => setTextSearch(e.target.value)}
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 text-black"
+            className="w-full px-4 py-2 rounded-lg border text-[#6b4226] bg-[#f3ece4] border-[#6b4226] placeholder-gray-500 hover:bg-[#e2d7c9] focus:outline-none focus:ring-2 focus:ring-[#6b4226] transition duration-300"
+            style={{
+              color: "#6b4226",
+              transition: "color 0.3s ease",
+            }}
+            onFocus={(e) => e.target.style.color = "#4a2d18"} // Darker color on focus
+            onBlur={(e) => e.target.style.color = "#6b4226"} // Original color on blur
           />
           <button 
-            type="submit" 
-            className="w-full px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
-            disabled={loading} // Disable button while loading
-          >
-            {loading ? 'Processing...' : 'Search'}
-          </button>
+  type="submit" 
+  className="w-full px-6 py-2 bg-[#6b4226] text-[#f3ece4] rounded-lg hover:bg-[#e2d7c9] hover:text-[#4a2d18] transition duration-300"
+  disabled={loading} // Disable button while loading
+>
+  {loading ? 'Processing...' : 'Search'}
+</button>
+
         </form>
 
         {error && <p className="mt-4 text-red-500">{error}</p>} {/* Error message */}
@@ -122,7 +129,7 @@ const Hero = () => {
         >
           <path
             d="M0,40 C50,80 100,0 150,40 C200,80 250,0 300,40 C350,80 400,0 450,40 C500,80 550,0 600,40 C650,80 700,0 750,40 C800,80 850,0 900,40 C950,80 1000,0 1050,40 C1100,80 1150,0 1200,40 L1200,120 L0,120 Z"
-            className="fill-current text-[#fdf7f2]" // Updated color to match the About section
+            className="fill-current text-[#f3ece4]" // Updated color to match the About section
           ></path>
         </svg>
       </div>

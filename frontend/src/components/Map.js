@@ -113,7 +113,7 @@ const MapChart = () => {
   };
 
   return (
-    <div className="map-container" style={{ position: "relative", backgroundColor: "#fdf7f2", padding: "10px"}}>
+    <div className="map-container" style={{ position: "relative", backgroundColor: "#f3ece4", padding: "10px"}}>
       <ComposableMap
         projection="geoMercator"
         projectionConfig={{
