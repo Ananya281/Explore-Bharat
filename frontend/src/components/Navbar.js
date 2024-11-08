@@ -39,7 +39,7 @@ const Navbar = () => {
                   to="hero" 
                   smooth={true} 
                   duration={500} 
-                  className="hover:text-[#4a2d18] cursor-pointer"
+                  className="transform transition-transform duration-200 hover:scale-105 hover:underline cursor-pointer"
                 >
                   Home
                 </ScrollLink>
@@ -49,7 +49,7 @@ const Navbar = () => {
                   to="about" 
                   smooth={true} 
                   duration={500} 
-                  className="hover:text-[#4a2d18] cursor-pointer"
+                  className="transform transition-transform duration-200 hover:scale-105 hover:underline cursor-pointer"
                 >
                   About
                 </ScrollLink>
@@ -59,7 +59,7 @@ const Navbar = () => {
                   to="map" 
                   smooth={true} 
                   duration={500} 
-                  className="hover:text-[#4a2d18] cursor-pointer"
+                  className="transform transition-transform duration-200 hover:scale-105 hover:underline cursor-pointer"
                 >
                   Map
                 </ScrollLink>
@@ -69,7 +69,7 @@ const Navbar = () => {
                   to="contact" 
                   smooth={true} 
                   duration={500} 
-                  className="hover:text-[#4a2d18] cursor-pointer"
+                  className="transform transition-transform duration-200 hover:scale-105 hover:underline cursor-pointer"
                 >
                   Contact
                 </ScrollLink>
@@ -78,22 +78,22 @@ const Navbar = () => {
           ) : (
             <>
               <li>
-                <RouterLink to="/" className="hover:text-[#4a2d18]">
+                <RouterLink to="/" className="transform transition-transform duration-200 hover:scale-105 hover:underline">
                   Home
                 </RouterLink>
               </li>
               <li>
-                <RouterLink to="/" className="hover:text-[#4a2d18]">
+                <RouterLink to="/" className="transform transition-transform duration-200 hover:scale-105 hover:underline">
                   About
                 </RouterLink>
               </li>
               <li>
-                <RouterLink to="/" className="hover:text-[#4a2d18]">
+                <RouterLink to="/" className="transform transition-transform duration-200 hover:scale-105 hover:underline">
                   Map
                 </RouterLink>
               </li>
               <li>
-                <RouterLink to="/" className="hover:text-[#4a2d18]">
+                <RouterLink to="/" className="transform transition-transform duration-200 hover:scale-105 hover:underline">
                   Contact
                 </RouterLink>
               </li>
@@ -106,7 +106,7 @@ const Navbar = () => {
           to="/login"
           className={`px-6 py-2 rounded-lg transition duration-300 mr-10 ${
             navbarScrolled 
-              ? 'bg-[#6b4226] text-[#f3ece4] hover:bg-[#4a2d18]'
+              ? 'bg-[#6b4226] text-[#f3ece4] hover:bg-[#a07850]'
               : 'bg-transparent text-white border border-white hover:bg-white hover:text-[#6b4226]'
           }`}
         >

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import indiaStates from "../india_states.json";
+import aboutPattern from "../assets/images/about.svg"; // Import the SVG decoration
 
 // Manually import all images
 import andamanImage from "../assets/images/states-map/andaman.jpeg";
@@ -39,7 +40,6 @@ import tripuraImage from "../assets/images/states-map/tripura.jpg";
 import upImage from "../assets/images/states-map/up.jpeg";
 import uttarakhandImage from "../assets/images/states-map/uttarakhand.jpg";
 import westbengalImage from "../assets/images/states-map/westbengal.jpg";
-// Add all the other imports here
 
 // Create an image mapping object
 const imageMapping = {
@@ -78,7 +78,6 @@ const imageMapping = {
   up: upImage,
   uttarakhand: uttarakhandImage,
   westbengal: westbengalImage,
-  // Map other states here
 };
 
 const MapChart = () => {
@@ -93,13 +92,8 @@ const MapChart = () => {
   const handleMouseEnter = (geo, evt) => {
     const stateName = geo.properties.NAME_1;
     const tagline = geo.properties.tagline;
-    const imageName = geo.properties.imageName; // Get imageName from JSON
-
-    // Resolve the image URL using the image mapping
+    const imageName = geo.properties.imageName;
     const imageUrl = imageMapping[imageName] || null;
-
-    console.log(`Image for ${stateName}:`, imageUrl);
-
     setHoveredData({ stateName, tagline, imageUrl });
     setHoverPosition({ x: evt.clientX, y: evt.clientY });
   };
@@ -113,7 +107,31 @@ const MapChart = () => {
   };
 
   return (
-    <div className="map-container" style={{ position: "relative", backgroundColor: "#f3ece4", padding: "10px"}}>
+    <div
+    className="map-container"
+    style={{
+      position: "relative",
+      backgroundColor: "#f3ece4",
+      padding: "5px",
+      overflow: "hidden",
+    }}
+  >
+      {/* Decorative Pattern using SVG as Background Image */}
+      <div
+        className="absolute top-0 left-0 w-48 h-48 opacity-20 bg-no-repeat bg-contain mr-10"
+        style={{git 
+          backgroundImage: `url(${aboutPattern})`,
+          filter: 'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
+        }}
+      ></div>
+      <div
+        className="absolute bottom-0 right-0 w-48 h-48 opacity-20 bg-no-repeat bg-contain"
+        style={{
+          backgroundImage: `url(${aboutPattern})`,
+          filter: 'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
+        }}
+      ></div>
+
       <ComposableMap
         projection="geoMercator"
         projectionConfig={{
@@ -135,19 +153,19 @@ const MapChart = () => {
                 style={{
                   default: {
                     fill: "#D6D6DA",
-                    stroke: "black",
+                    stroke: "#6b4226",
                     strokeWidth: 1,
                     outline: "none",
                   },
                   hover: {
-                    fill: "#F53",
-                    stroke: "black",
+                    fill: "#8c6239",
+                    stroke: "#6b4226",
                     strokeWidth: 1,
                     outline: "none",
                   },
                   pressed: {
-                    fill: "#E42",
-                    stroke: "black",
+                    fill: "#6b4226",
+                    stroke: "#6b4226",
                     strokeWidth: 1,
                     outline: "none",
                   },
@@ -166,19 +184,21 @@ const MapChart = () => {
             top: hoverPosition.y + 20,
             left: hoverPosition.x + 20,
             backgroundColor: "#fdf7f2",
-            color: "#333",
-            padding: "10px",
-            borderRadius: "5px",
+            color: "#6b4226",
+            padding: "15px",
+            borderRadius: "8px",
             pointerEvents: "none",
-            display: "flex", // To position the image and text next to each other
+            display: "flex",
+            zIndex:"2",
             gap: "10px",
-            alignItems: "center", // Align items vertically
-            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)", // Add subtle shadow for readability
+            alignItems: "center",
+            boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
+            border: "1px solid #8c6239",
           }}
         >
           <div>
-            <h4>{hoveredData.stateName}</h4>
-            <p>{hoveredData.tagline || "No tagline available"}</p>
+            <h4 className="text-lg font-bold">{hoveredData.stateName}</h4>
+            <p className="text-sm font-light">{hoveredData.tagline || "No tagline available"}</p>
           </div>
           {hoveredData.imageUrl ? (
             <img
@@ -187,12 +207,13 @@ const MapChart = () => {
               style={{
                 width: "50px",
                 height: "50px",
-                borderRadius: "50%", // Makes the image circular
-                objectFit: "cover", // Ensures the image fits well inside the circle
+                borderRadius: "50%",
+                objectFit: "cover",
+                border: "2px solid #8c6239",
               }}
             />
           ) : (
-            <p>No image available</p>
+            <p className="text-sm text-[#8c6239]">No image available</p>
           )}
         </div>
       )}
