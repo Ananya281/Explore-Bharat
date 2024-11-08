@@ -85,9 +85,13 @@ const Hero = () => {
                 onChange={handleImageUpload} 
                 className="hidden" 
               />
-              <span className="px-4 py-2 bg-white text-black rounded-lg cursor-pointer hover:bg-gray-200">
-                Choose File
-              </span>
+              <span 
+  className="px-4 py-2 bg-[#f3ece4] text-[#6b4226] rounded-lg cursor-pointer hover:bg-[#e2d7c9] hover:text-[#4a2d18] border border-[#6b4226] transition duration-300"
+>
+  Choose File
+</span>
+
+
             </label>
             <span className="text-gray-400 mt-1 text-sm">
               {uploadedImage ? uploadedImage.name : 'No file chosen'}

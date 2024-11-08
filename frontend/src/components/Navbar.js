@@ -25,13 +25,13 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition duration-300 ${
-        navbarScrolled ? 'bg-white shadow-md' : 'bg-transparent'
+        navbarScrolled ? 'bg-[#f3ece4] shadow-md' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto flex justify-between items-center py-4">
         
         {/* Left Section: Navigation Links */}
-        <ul className={`ml-8 flex space-x-6 ${navbarScrolled ? 'text-gray-800' : 'text-white'}`}>
+        <ul className={`ml-8 flex space-x-6 ${navbarScrolled ? 'text-[#6b4226]' : 'text-white'}`}>
           {isHomePage ? (
             <>
               <li>
@@ -39,7 +39,7 @@ const Navbar = () => {
                   to="hero" 
                   smooth={true} 
                   duration={500} 
-                  className="hover:text-blue-500 cursor-pointer"
+                  className="hover:text-[#4a2d18] cursor-pointer"
                 >
                   Home
                 </ScrollLink>
@@ -49,7 +49,7 @@ const Navbar = () => {
                   to="about" 
                   smooth={true} 
                   duration={500} 
-                  className="hover:text-blue-500 cursor-pointer"
+                  className="hover:text-[#4a2d18] cursor-pointer"
                 >
                   About
                 </ScrollLink>
@@ -59,7 +59,7 @@ const Navbar = () => {
                   to="map" 
                   smooth={true} 
                   duration={500} 
-                  className="hover:text-blue-500 cursor-pointer"
+                  className="hover:text-[#4a2d18] cursor-pointer"
                 >
                   Map
                 </ScrollLink>
@@ -69,7 +69,7 @@ const Navbar = () => {
                   to="contact" 
                   smooth={true} 
                   duration={500} 
-                  className="hover:text-blue-500 cursor-pointer"
+                  className="hover:text-[#4a2d18] cursor-pointer"
                 >
                   Contact
                 </ScrollLink>
@@ -78,22 +78,22 @@ const Navbar = () => {
           ) : (
             <>
               <li>
-                <RouterLink to="/" className="hover:text-blue-500">
+                <RouterLink to="/" className="hover:text-[#4a2d18]">
                   Home
                 </RouterLink>
               </li>
               <li>
-                <RouterLink to="/" className="hover:text-blue-500">
+                <RouterLink to="/" className="hover:text-[#4a2d18]">
                   About
                 </RouterLink>
               </li>
               <li>
-                <RouterLink to="/" className="hover:text-blue-500">
+                <RouterLink to="/" className="hover:text-[#4a2d18]">
                   Map
                 </RouterLink>
               </li>
               <li>
-                <RouterLink to="/" className="hover:text-blue-500">
+                <RouterLink to="/" className="hover:text-[#4a2d18]">
                   Contact
                 </RouterLink>
               </li>
@@ -105,7 +105,9 @@ const Navbar = () => {
         <RouterLink
           to="/login"
           className={`px-6 py-2 rounded-lg transition duration-300 mr-10 ${
-            navbarScrolled ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-transparent text-white border border-white hover:bg-white hover:text-blue-500'
+            navbarScrolled 
+              ? 'bg-[#6b4226] text-[#f3ece4] hover:bg-[#4a2d18]'
+              : 'bg-transparent text-white border border-white hover:bg-white hover:text-[#6b4226]'
           }`}
         >
           Login
