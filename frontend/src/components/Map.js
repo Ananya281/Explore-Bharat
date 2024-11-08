@@ -119,7 +119,7 @@ const MapChart = () => {
       {/* Decorative Pattern using SVG as Background Image */}
       <div
         className="absolute top-0 left-0 w-48 h-48 opacity-20 bg-no-repeat bg-contain mr-10"
-        style={{git 
+        style={{
           backgroundImage: `url(${aboutPattern})`,
           filter: 'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
         }}
