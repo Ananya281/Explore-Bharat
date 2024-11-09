@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import emailjs from 'emailjs-com';
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -10,8 +12,25 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
+    
+    // Define the email parameters
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      message: formData.message,
+    };
+
+    // Send the email using EmailJS
+    emailjs.send('service_6z8uvqq', 'template_9dpckk4', templateParams, 'SZRrTZ66sAHMTHU3Y')
+      .then((response) => {
+        console.log('Email sent successfully!', response.status, response.text);
+        setStatus('Message sent successfully!');
+        setFormData({ name: '', email: '', message: '' }); // Clear the form
+      })
+      .catch((error) => {
+        console.error('Failed to send email:', error);
+        setStatus('Failed to send message. Please try again.');
+      });
   };
 
   return (
@@ -45,8 +64,11 @@ const Contact = () => {
             onChange={handleInputChange} 
             required 
           />
-          <button className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300">Send Message</button>
+          <button className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300">
+            Send Message
+          </button>
         </form>
+        {status && <p className="mt-4 text-lg">{status}</p>}
       </div>
     </section>
   );

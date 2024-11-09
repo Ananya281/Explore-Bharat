@@ -73,8 +73,8 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative container mx-auto text-center text-white z-10 flex flex-col items-center">
-        <h1 className="text-4xl font-bold">Welcome to Explore Bharat</h1>
-        <p className="mt-4">Discover India's rich cultural diversity</p>
+        <h1 className="text-6xl font-extrabold animate-fade-in-up" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}>Welcome to Explore Bharat</h1>
+        <p className="mt-4 text-2xl font-light max-w-lg animate-fade-in" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 600 }}>Discover India's rich cultural diversity</p>
         
         {/* Stacked Form Elements */}
         <form onSubmit={handleSearchSubmit} className="mt-8 flex flex-col items-center gap-4 w-full max-w-lg">
@@ -107,7 +107,7 @@ const Hero = () => {
               color: "#6b4226",
               transition: "color 0.3s ease",
             }}
-            onFocus={(e) => e.target.style.color = "#4a2d18"} // Darker color on focus
+            // onFocus={(e) => e.target.style.color = "#4a2d18"} // Darker color on focus
             onBlur={(e) => e.target.style.color = "#6b4226"} // Original color on blur
           />
           <button 
