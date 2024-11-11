@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import indiaStates from "../india_states.json";
-import aboutPattern from "../assets/images/about.svg"; // Import the SVG decoration
+import aboutPattern from "../assets/images/about.svg";
 
 // Manually import all images
 import andamanImage from "../assets/images/states-map/andaman.jpeg";
@@ -41,7 +41,6 @@ import upImage from "../assets/images/states-map/up.jpeg";
 import uttarakhandImage from "../assets/images/states-map/uttarakhand.jpg";
 import westbengalImage from "../assets/images/states-map/westbengal.jpg";
 
-// Create an image mapping object
 const imageMapping = {
   andaman: andamanImage,
   andhrapradesh: andhrapradeshImage,
@@ -108,27 +107,29 @@ const MapChart = () => {
 
   return (
     <div
-    className="map-container"
-    style={{
-      position: "relative",
-      backgroundColor: "#f3ece4",
-      padding: "5px",
-      overflow: "hidden",
-    }}
-  >
+      className="map-container"
+      style={{
+        position: "relative",
+        backgroundColor: "#f3ece4",
+        padding: "5px",
+        overflow: "hidden",
+      }}
+    >
       {/* Decorative Pattern using SVG as Background Image */}
       <div
-        className="absolute top-0 left-0 w-48 h-48 opacity-20 bg-no-repeat bg-contain mr-10"
+        className="absolute top-0 left-0 w-48 h-48 opacity-20 bg-no-repeat bg-contain"
         style={{
           backgroundImage: `url(${aboutPattern})`,
-          filter: 'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
+          filter:
+            "brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)",
         }}
       ></div>
       <div
         className="absolute bottom-0 right-0 w-48 h-48 opacity-20 bg-no-repeat bg-contain"
         style={{
           backgroundImage: `url(${aboutPattern})`,
-          filter: 'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
+          filter:
+            "brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)",
         }}
       ></div>
 
@@ -189,7 +190,7 @@ const MapChart = () => {
             borderRadius: "8px",
             pointerEvents: "none",
             display: "flex",
-            zIndex:"2",
+            zIndex: "2",
             gap: "10px",
             alignItems: "center",
             boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",

@@ -36,15 +36,40 @@ const Welcome = ({ placeName, description }) => {
     <div
       className="welcome-section"
       style={{
+        position: 'relative',
+        height: '100vh',
+        width: '100vw',
         backgroundImage: `url(${imageUrl})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <div className="overlay">
-        <h1>{placeName}</h1>
-        <p>{wikiDescription}</p>
+      {/* Black overlay */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.7)', // Adjust the opacity here for a darker or lighter overlay
+        zIndex: 1,
+      }} />
+
+      {/* Content on top of the overlay */}
+      <div style={{
+        position: 'relative',
+        zIndex: 2,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+        color: '#fff',
+        textAlign: 'center',
+      }}>
+        <h1 style={{ fontSize: '3rem', margin: 0 }}>{placeName}</h1>
+        <p style={{ fontSize: '1.2rem', maxWidth: '800px' }}>{wikiDescription}</p>
       </div>
     </div>
   );

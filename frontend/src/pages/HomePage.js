@@ -16,7 +16,17 @@ const HomePage = () => {
         <About />
       </section>
       
-      <section id="map" style={{ width: "100vw", height: "70vh", paddingBottom: "20px",marginBottom: "30px", justifyContent: "center", alignItems: "center" }}>
+      <section
+        id="map"
+        style={{
+          width: "100vw",
+          height: "75vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "0", // Adjust to control the space above
+        }}
+      >
         <Map />
       </section>
       

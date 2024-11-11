@@ -3,7 +3,7 @@ import aboutPattern from '../assets/images/about.svg'; // Import the SVG file
 
 const About = () => {
   return (
-    <section className="bg-[#f3ece4] py-20 relative overflow-hidden">
+    <section className="bg-[#f3ece4] py-10 relative overflow-hidden pt-20">
       {/* Decorative Pattern using SVG as Background Image */}
       <div
         className="absolute top-0 left-0 w-48 h-48 opacity-20 bg-no-repeat bg-contain"
@@ -21,7 +21,7 @@ const About = () => {
       ></div>
 
       <div className="container mx-auto px-6 lg:px-12 text-center relative z-10">
-        <h2 className="text-5xl font-bold text-[#6b4226] font-serif">
+        <h2 id="about-heading" className="text-5xl font-bold text-[#6b4226] font-serif">
           About <span className="italic text-[#8c6239]">Explore Bharat</span>
         </h2>
         <div className="flex justify-center mt-3 mb-6">
@@ -31,7 +31,7 @@ const About = () => {
         <div className="relative flex justify-center items-center my-4">
           <div
             className="w-10 h-10 bg-no-repeat bg-center bg-contain"
-            style={{ backgroundImage: "url('/path/to/heritage-icon.png')" }}
+            style={{ backgroundImage: "url('../assets/images/heritage-icon.png')" }} // Update path if needed
           ></div>
         </div>
 
@@ -41,8 +41,8 @@ const About = () => {
       </div>
 
       <div
-        className="mt-10 w-full h-8 bg-repeat-x bg-bottom"
-        style={{ backgroundImage: "url('/path/to/border-pattern.png')" }}
+        className="w-full h-8 bg-repeat-x bg-bottom"
+        style={{ backgroundImage: "url('../assets/images/border-pattern.png')" }} // Update path if needed
       ></div>
     </section>
   );
