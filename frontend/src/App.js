@@ -6,15 +6,17 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import TourismPage from './pages/TourismPage';
-import StateInfoPage from './pages/StateInfoPage'; // Your dynamic state info page
+import StateInfoPage from './pages/StateInfoPage';
+import Contact from './pages/Contact'; // Import Contact page
+import Feedback from './pages/Feedback'; // Import Feedback page
 import Navbar from './components/Navbar';
 import Footer from './components/Footer'; 
 
 const App = () => {
   const location = useLocation(); // Get the current path
 
-  // Define the path where the Navbar should be displayed (only Home Page)
-  const navbarPaths = ['/'];
+  // Define the paths where the Navbar should be displayed (Home Page, Contact Page, and Feedback Page)
+  const navbarPaths = ['/', '/contact', '/feedback'];
 
   return (
     <>
@@ -25,9 +27,10 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        {/* Dynamic route for state information */}
         <Route path="/state/:stateName" element={<StateInfoPage />} /> 
         <Route path="/tourism" element={<TourismPage />} />
+        <Route path="/contact" element={<Contact />} /> {/* Contact page route */}
+        <Route path="/feedback" element={<Feedback />} /> {/* Feedback page route */}
       </Routes>
 
       {/* Always render Footer */}

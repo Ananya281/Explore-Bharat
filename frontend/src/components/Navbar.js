@@ -64,26 +64,6 @@ const Navbar = () => {
                   Map
                 </ScrollLink>
               </li>
-              <li>
-                <ScrollLink 
-                  to="contact" 
-                  smooth={true} 
-                  duration={500} 
-                  className="transform transition-transform duration-200 hover:scale-105 hover:underline cursor-pointer"
-                >
-                  Contact
-                </ScrollLink>
-              </li>
-              <li>
-                <ScrollLink 
-                  to="feedback" 
-                  smooth={true} 
-                  duration={500} 
-                  className="transform transition-transform duration-200 hover:scale-105 hover:underline cursor-pointer"
-                >
-                  Feedback
-                </ScrollLink>
-              </li>
             </>
           ) : (
             <>
@@ -102,18 +82,20 @@ const Navbar = () => {
                   Map
                 </RouterLink>
               </li>
-              <li>
-                <RouterLink to="/" className="transform transition-transform duration-200 hover:scale-105 hover:underline">
-                  Contact
-                </RouterLink>
-              </li>
-              <li>
-                <RouterLink to="/" className="transform transition-transform duration-200 hover:scale-105 hover:underline">
-                  Feedback
-                </RouterLink>
-              </li>
             </>
           )}
+          
+          {/* Contact and Feedback Links available across all pages */}
+          <li>
+            <RouterLink to="/contact" className="transform transition-transform duration-200 hover:scale-105 hover:underline">
+              Contact
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/feedback" className="transform transition-transform duration-200 hover:scale-105 hover:underline">
+              Feedback
+            </RouterLink>
+          </li>
         </ul>
 
         {/* Right Section: Login Button */}

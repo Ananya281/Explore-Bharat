@@ -8,6 +8,10 @@ html, body {
   overflow-x: hidden;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 
 .map, .about, .testimonial, .contact, .feedback {
   padding: 40px 20px;

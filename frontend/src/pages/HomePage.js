@@ -2,8 +2,7 @@ import React from 'react';
 import Hero from '../components/Hero';
 import Map from '../components/Map';
 import About from '../components/About';
-import Contact from '../components/Contact';
-import Feedback from '../components/Feedback';
+import Testimonial from '../components/Testimonial'; // Import the Testimonial component
 
 const HomePage = () => {
   return (
@@ -29,13 +28,10 @@ const HomePage = () => {
       >
         <Map />
       </section>
-      
-      <section id="contact">
-        <Contact />
-      </section>
 
-      <section>
-        <Feedback />
+      {/* Testimonial Section */}
+      <section id="testimonials" className="py-12">
+        <Testimonial />
       </section>
     </div>
   );
