@@ -113,6 +113,7 @@ const MapChart = () => {
         backgroundColor: "#f3ece4",
         padding: "5px",
         overflow: "hidden",
+        height:"100vh",
       }}
     >
       {/* Decorative Pattern using SVG as Background Image */}

@@ -1,8 +1,9 @@
-import React from 'react';
 import Hero from '../components/Hero';
+import ExploreHeritage from '../components/ExploreHeritage';
 import Map from '../components/Map';
-import About from '../components/About';
-import Testimonial from '../components/Testimonial'; // Import the Testimonial component
+import Testimonial from '../components/Testimonial';
+import ImageCollage from '../components/ImageCollage';
+
 
 const HomePage = () => {
   return (
@@ -10,31 +11,40 @@ const HomePage = () => {
       <section id="hero">
         <Hero />
       </section>
-      
-      <section id="about">
-        <About />
-      </section>
-      
-      <section
-        id="map"
-        style={{
-          width: "100vw",
-          height: "75vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "0", // Adjust to control the space above
-        }}
-      >
-        <Map />
+
+      <section id="explore-heritage">
+        <ExploreHeritage />
       </section>
 
-      {/* Testimonial Section */}
+      <section
+  id="map-and-collage"
+  style={{
+    display: "flex",
+    width: "100vw",
+    height: "100vh",
+  }}
+>
+  {/* Left Side - Map Component */}
+  <div style={{ flex: 1, height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div style={{ width: "100%", height: "100%" }}>
+      <Map />
+    </div>
+  </div>
+
+  {/* Right Side - Image Collage */}
+  <div style={{ flex: 1, height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div style={{ width: "100%", height: "100%" }}>
+      <ImageCollage />
+    </div>
+  </div>
+</section>
+
+
       <section id="testimonials" className="py-12">
         <Testimonial />
       </section>
     </div>
   );
-}
+};
 
 export default HomePage;

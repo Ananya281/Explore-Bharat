@@ -45,14 +45,12 @@ const Navbar = () => {
                 </ScrollLink>
               </li>
               <li>
-                <ScrollLink 
-                  to="about" 
-                  smooth={true} 
-                  duration={500} 
-                  className="transform transition-transform duration-200 hover:scale-105 hover:underline cursor-pointer"
+                <RouterLink 
+                  to="/about" 
+                  className="transform transition-transform duration-200 hover:scale-105 hover:underline"
                 >
                   About
-                </ScrollLink>
+                </RouterLink>
               </li>
               <li>
                 <ScrollLink 
@@ -73,13 +71,8 @@ const Navbar = () => {
                 </RouterLink>
               </li>
               <li>
-                <RouterLink to="/" className="transform transition-transform duration-200 hover:scale-105 hover:underline">
+                <RouterLink to="/about" className="transform transition-transform duration-200 hover:scale-105 hover:underline">
                   About
-                </RouterLink>
-              </li>
-              <li>
-                <RouterLink to="/" className="transform transition-transform duration-200 hover:scale-105 hover:underline">
-                  Map
                 </RouterLink>
               </li>
             </>
