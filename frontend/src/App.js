@@ -11,8 +11,8 @@ import Contact from './pages/Contact';
 import Feedback from './pages/Feedback';
 import AboutPage from './pages/About';
 import FestivalsPage from './pages/FestivalsPage';
-import MonumentsPage from './pages/MonumentsPage'; // Ensure this matches the file name exactly
-import ArtAndCraftsPage from './pages/ArtAndCraftsPage'; // Ensure this matches the file name exactly
+import MonumentsPage from './pages/MonumentsPage'; 
+import ArtAndCraftsPage from './pages/ArtAndCraftsPage'; 
 import CuisinePage from './pages/CuisinePage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -24,6 +24,7 @@ const App = () => {
 
   return (
     <>
+      {/* Conditionally render Navbar based on the current path */}
       {navbarPaths.includes(location.pathname) && <Navbar />}
 
       <Routes>
@@ -46,8 +47,9 @@ const App = () => {
   );
 };
 
+// AppWrapper component wrapping App with Router
 const AppWrapper = () => (
-  <Router>
+  <Router> {/* Wrap everything in Router */}
     <App />
   </Router>
 );
