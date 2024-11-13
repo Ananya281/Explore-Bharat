@@ -1,26 +1,19 @@
-// src/components/ImageCollage.js
+// src/components/ExploreHistory.js
 import React from 'react';
-import collageImage from '../assets/images/collage.png'; // Update the path as needed
 
-const ImageCollage = () => {
+const ExploreHistory = () => {
   return (
-    <div className="flex items-center justify-center h-screen bg-[#f3ece4] z-2">
-      {/* Display the collage image */}
-      <div className="relative overflow-hidden max-w-3xl">
-        <img
-          src={collageImage}
-          alt="Vibrant Culture of India"
-          className="w-full h-full object-cover z-2"
-        />
-        {/* Optional Overlay for text
-        <div className="absolute inset-0 bg-black  flex items-center justify-center"> */}
-          {/* <h3 className="text-white text-3xl font-bold text-center p-4"> */}
-            {/* Explore the Vibrant Culture of India */}
-          {/* </h3> */}
-        {/* </div> */}
-      </div>
-    </div>
+    <section className="explore-history py-16 bg-[#f3ece4] text-center">
+      <h2 className="text-4xl font-bold text-[#6b4226] mb-8">Explore India's Rich History</h2>
+      <p className="text-lg text-[#8c6239] mb-12 max-w-2xl mx-auto">
+        Journey through the epochs of India’s heritage, from ancient civilizations and empires 
+        to revolutionary movements and the country’s path to independence.
+      </p>
+      <p className="text-md text-[#8c6239] max-w-2xl mx-auto">
+        Discover the stories, monuments, and cultural milestones that have shaped India’s identity over centuries.
+      </p>
+    </section>
   );
 };
 
-export default ImageCollage;
+export default ExploreHistory;

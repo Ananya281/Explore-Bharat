@@ -106,119 +106,131 @@ const MapChart = () => {
   };
 
   return (
-    <div
-      className="map-container"
-      style={{
-        position: "relative",
-        backgroundColor: "#f3ece4",
-        padding: "5px",
-        overflow: "hidden",
-        height:"100vh",
-      }}
-    >
-      {/* Decorative Pattern using SVG as Background Image */}
-      <div
-        className="absolute top-0 left-0 w-48 h-48 opacity-20 bg-no-repeat bg-contain"
-        style={{
-          backgroundImage: `url(${aboutPattern})`,
-          filter:
-            "brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)",
-        }}
-      ></div>
-      <div
-        className="absolute bottom-0 right-0 w-48 h-48 opacity-20 bg-no-repeat bg-contain"
-        style={{
-          backgroundImage: `url(${aboutPattern})`,
-          filter:
-            "brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)",
-        }}
-      ></div>
+    <div className="flex flex-col lg:flex-row h-screen bg-[#f3ece4]">
+      {/* Map Section */}
+      <div className="flex-1 relative h-2/3 lg:h-full">
+        <div
+          className="absolute top-0 left-0 w-48 h-48 opacity-20 bg-no-repeat bg-contain"
+          style={{
+            backgroundImage: `url(${aboutPattern})`,
+            filter:
+              "brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)",
+          }}
+        ></div>
+        <div
+          className="absolute bottom-0 right-0 w-48 h-48 opacity-20 bg-no-repeat bg-contain"
+          style={{
+            backgroundImage: `url(${aboutPattern})`,
+            filter:
+              "brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)",
+          }}
+        ></div>
 
-      <ComposableMap
-        projection="geoMercator"
-        projectionConfig={{
-          scale: 1000,
-          center: [78.9629, 23.5937],
-        }}
-        style={{ width: "100%", height: "100%" }}
-      >
-        <Geographies geography={indiaStates}>
-          {({ geographies }) =>
-            geographies.map((geo) => (
-              <Geography
-                key={geo.rsmKey}
-                geography={geo}
-                onMouseEnter={(evt) => handleMouseEnter(geo, evt)}
-                onMouseMove={(evt) => setHoverPosition({ x: evt.clientX, y: evt.clientY })}
-                onMouseLeave={handleMouseLeave}
-                onClick={() => handleStateClick(geo.properties.NAME_1)}
+        <ComposableMap
+          projection="geoMercator"
+          projectionConfig={{
+            scale: 1000,
+            center: [78.9629, 23.5937],
+          }}
+          style={{ width: "100%", height: "100%" }}
+        >
+          <Geographies geography={indiaStates}>
+            {({ geographies }) =>
+              geographies.map((geo) => (
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  onMouseEnter={(evt) => handleMouseEnter(geo, evt)}
+                  onMouseMove={(evt) => setHoverPosition({ x: evt.clientX, y: evt.clientY })}
+                  onMouseLeave={handleMouseLeave}
+                  onClick={() => handleStateClick(geo.properties.NAME_1)}
+                  style={{
+                    default: {
+                      fill: "#D6D6DA",
+                      stroke: "#6b4226",
+                      strokeWidth: 1,
+                      outline: "none",
+                    },
+                    hover: {
+                      fill: "#8c6239",
+                      stroke: "#6b4226",
+                      strokeWidth: 1,
+                      outline: "none",
+                    },
+                    pressed: {
+                      fill: "#6b4226",
+                      stroke: "#6b4226",
+                      strokeWidth: 1,
+                      outline: "none",
+                    },
+                  }}
+                />
+              ))
+            }
+          </Geographies>
+        </ComposableMap>
+
+        {hoveredData.stateName && (
+          <div
+            className="hover-info"
+            style={{
+              position: "absolute",
+              top: hoverPosition.y + 20,
+              left: hoverPosition.x + 20,
+              backgroundColor: "#fdf7f2",
+              color: "#6b4226",
+              padding: "15px",
+              borderRadius: "8px",
+              pointerEvents: "none",
+              display: "flex",
+              zIndex: "3",
+              gap: "10px",
+              alignItems: "center",
+              boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
+              border: "1px solid #8c6239",
+            }}
+          >
+            <div>
+              <h4 className="text-lg font-bold">{hoveredData.stateName}</h4>
+              <p className="text-sm font-light">{hoveredData.tagline || "No tagline available"}</p>
+            </div>
+            {hoveredData.imageUrl ? (
+              <img
+                src={hoveredData.imageUrl}
+                alt={hoveredData.stateName}
                 style={{
-                  default: {
-                    fill: "#D6D6DA",
-                    stroke: "#6b4226",
-                    strokeWidth: 1,
-                    outline: "none",
-                  },
-                  hover: {
-                    fill: "#8c6239",
-                    stroke: "#6b4226",
-                    strokeWidth: 1,
-                    outline: "none",
-                  },
-                  pressed: {
-                    fill: "#6b4226",
-                    stroke: "#6b4226",
-                    strokeWidth: 1,
-                    outline: "none",
-                  },
+                  width: "50px",
+                  height: "50px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  border: "2px solid #8c6239",
                 }}
               />
-            ))
-          }
-        </Geographies>
-      </ComposableMap>
-
-      {hoveredData.stateName && (
-        <div
-          className="hover-info"
-          style={{
-            position: "absolute",
-            top: hoverPosition.y + 20,
-            left: hoverPosition.x + 20,
-            backgroundColor: "#fdf7f2",
-            color: "#6b4226",
-            padding: "15px",
-            borderRadius: "8px",
-            pointerEvents: "none",
-            display: "flex",
-            zIndex: "3",
-            gap: "10px",
-            alignItems: "center",
-            boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
-            border: "1px solid #8c6239",
-          }}
-        >
-          <div>
-            <h4 className="text-lg font-bold">{hoveredData.stateName}</h4>
-            <p className="text-sm font-light">{hoveredData.tagline || "No tagline available"}</p>
+            ) : (
+              <p className="text-sm text-[#8c6239]">No image available</p>
+            )}
           </div>
-          {hoveredData.imageUrl ? (
-            <img
-              src={hoveredData.imageUrl}
-              alt={hoveredData.stateName}
-              style={{
-                width: "50px",
-                height: "50px",
-                borderRadius: "50%",
-                objectFit: "cover",
-                border: "2px solid #8c6239",
-              }}
-            />
-          ) : (
-            <p className="text-sm text-[#8c6239]">No image available</p>
-          )}
-        </div>
-      )}
+        )}
+      </div>
+
+      {/* Text Section */}
+      <div className="flex-1 p-10">
+        <h1 className="text-3xl font-bold mb-4 text-[#6b4226]">Discover India's Rich History</h1>
+        <p className="text-lg text-[#8c6239] leading-relaxed mb-4">
+          India, known for its vast diversity and vibrant culture, has a history that dates back thousands of years.
+        </p>
+        <p className="text-lg text-[#8c6239] leading-relaxed mb-8">
+          This journey through time reveals India's legacy of spiritual teachings and architectural marvels, captivating the world.
+        </p>
+
+        <h1 className="text-3xl font-bold mb-4 text-[#6b4226]">India's Rich Culture</h1>
+        <p className="text-lg text-[#8c6239] leading-relaxed mb-4">
+          Indian culture is a vibrant mix of traditions, art forms, and languages that reflect its diversity.
+        </p>
+        <p className="text-lg text-[#8c6239] leading-relaxed">
+          From colorful festivals to diverse culinary arts, India’s culture showcases a harmonious blend of customs.
+        </p>
+      </div>
     </div>
   );
 };
