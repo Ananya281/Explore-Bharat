@@ -66,6 +66,13 @@ const ImageGrid = () => {
           filter: 'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
         }}
       ></div>
+      <div
+        className="absolute top-1/2 right-0 transform -translate-y-1/2 w-32 h-32 opacity-15 bg-no-repeat bg-contain"
+        style={{
+          backgroundImage: `url(${aboutPattern})`,
+          filter: 'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
+        }}
+      ></div>
 
       <h2 className="image-grid-title">Explore Cultural Highlights</h2>
       <div className="image-grid">

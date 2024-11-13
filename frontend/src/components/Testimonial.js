@@ -1,6 +1,5 @@
-// src/components/Testimonial.js
 import React from 'react';
-import { motion } from 'framer-motion';
+import './Testimonial.css';
 
 const testimonials = [
   { text: "Explore Bharat offers an amazing cultural experience! I've learned so much.", author: "User A" },
@@ -13,30 +12,18 @@ const testimonials = [
 
 const Testimonial = () => {
   return (
-    <div className="container mx-auto text-center py-12 px-6 overflow-hidden">
-      <h2 className="text-4xl font-bold text-[#f3ece4] mb-8">What Our Users Say</h2> {/* Updated heading color */}
-      <motion.div
-        className="flex"
-        style={{ display: 'flex', width: 'max-content' }}
-        animate={{ x: ['0%', '-100%'] }}
-        transition={{
-          repeat: Infinity,
-          ease: 'linear',
-          duration: 30, // Adjust for slower or faster speed
-        }}
-      >
-        {/* Duplicate testimonials to create a seamless loop */}
+    <div className="testimonial-container">
+      <h2 className="text-4xl font-bold text-[#f3ece4] mb-8">What Our Users Say</h2>
+      <div className="testimonial-scroller">
         {[...testimonials, ...testimonials].map((testimonial, index) => (
           <div
             key={index}
-            className="p-6 bg-[#f3ece4] rounded-lg shadow-md mx-4"
-            style={{ minWidth: '200px', maxWidth: '200px', minHeight: '300px' }}
-          >
+            className="p-6 bg-[#f3ece4] rounded-lg shadow-md" style={{ minWidth: '200px', maxWidth: '200px', minHeight: '300px' }}>
             <p className="text-lg text-[#8c6239] italic">"{testimonial.text}"</p>
             <p className="mt-4 font-semibold">- {testimonial.author}</p>
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };
