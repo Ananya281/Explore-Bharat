@@ -191,7 +191,7 @@ const MapChart = () => {
             borderRadius: "8px",
             pointerEvents: "none",
             display: "flex",
-            zIndex: "2",
+            zIndex: "3",
             gap: "10px",
             alignItems: "center",
             boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
