@@ -21,37 +21,58 @@ const Hero = () => {
     }
   };
 
-  const handleSearchSubmit = async (e) => {
-    e.preventDefault();
+  // Define the list of states
+const stateNames = [
+  "AndamanandNicobar", "AndhraPradesh", "ArunachalPradesh", "Assam",
+  "Bihar", "Chandigarh", "Chhattisgarh", "DadraandNagarHaveli", "Delhi",
+  "Goa", "Gujarat", "Haryana", "HimachalPradesh", "JammuandKashmir",
+  "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "MadhyaPradesh",
+  "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Puducherry", "Punjab",
+  "Rajasthan", "Sikkim", "Tamilnadu", "Tripura", "Uttarakhand", "UttarPradesh",
+  "Westbengal"
+];
 
-    if (uploadedImage) {
-      const formData = new FormData();
-      formData.append('file', uploadedImage);
-      setLoading(true);
-      setError(null);
+const handleSearchSubmit = async (e) => {
+  e.preventDefault();
 
-      try {
-        const response = await axios.post('http://127.0.0.1:5000/predict', formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        });
-        const predictedClass = response.data.predicted_class;
+  if (uploadedImage) {
+    // Existing image upload logic
+    const formData = new FormData();
+    formData.append('file', uploadedImage);
+    setLoading(true);
+    setError(null);
 
-        console.log("Predicted Class:", predictedClass);
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/predict', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      const predictedClass = response.data.predicted_class;
+
+      console.log("Predicted Class:", predictedClass);
+      if (stateNames.includes(predictedClass)) {
+        navigate(`/state/${predictedClass}`);
+      } else {
         navigate('/tourism', { state: { predictedClass } });
-      } catch (error) {
-        console.error("Prediction error:", error);
-        setError("Failed to get prediction. Please try again.");
-      } finally {
-        setLoading(false);
       }
-    } else if (textSearch.trim()) {
-      const predictedClass = textSearch.trim();
-      console.log("Predicted Class (from text search):", predictedClass);
-      navigate('/tourism', { state: { predictedClass } });
-    } else {
-      setError("Please upload an image or enter a search term.");
+    } catch (error) {
+      console.error("Prediction error:", error);
+      setError("Failed to get prediction. Please try again.");
+    } finally {
+      setLoading(false);
     }
-  };
+  } else if (textSearch.trim()) {
+    const predictedClass = textSearch.trim();
+    console.log("Predicted Class (from text search):", predictedClass);
+
+    if (stateNames.includes(predictedClass)) {
+      navigate(`/state/${predictedClass}`);
+    } else {
+      navigate('/tourism', { state: { predictedClass } });
+    }
+  } else {
+    setError("Please upload an image or enter a search term.");
+  }
+};
 
   return (
     <section 
