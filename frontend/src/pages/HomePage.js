@@ -34,7 +34,7 @@ const HomePage = () => {
       </section>
 
 
-      <section id="testimonials" className="py-12">
+      <section id="testimonials" className="py-0">
         <Testimonial />
       </section>
     </div>

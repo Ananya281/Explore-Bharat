@@ -15,13 +15,16 @@ const testimonials = [
 const Testimonial = () => {
   return (
     <div className="testimonial-container">
-      <h2 className="text-4xl font-bold text-[#f3ece4] mb-8">What Our Users Say</h2>
-      <div className="testimonial-scroller">W
+    {/* Black Overlay */}
+    <div className="absolute inset-0 bg-black opacity-50"></div>
+    <div className="relative z-10">
+      <h2 className="text-4xl font-bold text-[#f3ece4] mb-12">What Our Users Say</h2>
+      <div className="testimonial-scroller">
         {[...testimonials, ...testimonials].map((testimonial, index) => (
           <div
             key={index}
-            className="testimonial-item bg-white rounded-lg shadow-lg p-6"
-            style={{ minWidth: '220px', maxWidth: '220px', minHeight: '380px' }}
+            className="testimonial-item bg-white rounded-lg shadow-lg p-6 mt-5"
+            style={{ minWidth: '220px', maxWidth: '220px', minHeight: '350px' }}
           >
             {/* Profile Image */}
             <div className="testimonial-image-container">
@@ -52,6 +55,7 @@ const Testimonial = () => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };
