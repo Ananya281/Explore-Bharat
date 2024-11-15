@@ -7,19 +7,19 @@ import andhrapradeshImage from "../assets/images/image-inside/AndhraPradesh.jpeg
 import assamImage from "../assets/images/image-inside/Assam.jpeg";
 import biharImage from "../assets/images/image-inside/Bihar.jpeg";
 // import chandigarhImage from "../assets/images/image-inside/Chandigarh.jpeg";
-import chattisgarhImage from "../assets/images/image-inside/Chattisgarh.jpeg";
+import chhattisgarhImage from "../assets/images/image-inside/Chattisgarh.jpeg";
 // import dadraandnagarImage from "../assets/images/image-inside/DadraandNagar.jpeg";
 import delhiImage from "../assets/images/image-inside/Delhi.jpeg";
 import goaImage from "../assets/images/image-inside/Goa.jpeg";
 import gujaratImage from "../assets/images/image-inside/Gujarat.jpeg";
 import haryanaImage from "../assets/images/image-inside/Haryana.jpeg";
-import himachalImage from "../assets/images/image-inside/HimachalPradesh.jpeg";
-import jkImage from "../assets/images/image-inside/JammuandKashmir.jpeg";
+import himachalpradeshImage from "../assets/images/image-inside/HimachalPradesh.jpeg";
+import jammuandkashmirImage from "../assets/images/image-inside/JammuandKashmir.jpeg";
 import jharkhandImage from "../assets/images/image-inside/Jharkhand.jpeg";
-import KarnatakaImage from "../assets/images/image-inside/Karnataka.jpeg";
+import karnatakaImage from "../assets/images/image-inside/Karnataka.jpeg";
 import keralaImage from "../assets/images/image-inside/Kerala.jpeg";
 // import lakshdweepImage from "../assets/images/image-inside/Lakshdweep.jpeg";
-import mpImage from "../assets/images/image-inside/MadhyaPradesh.jpeg";
+import madhyapradeshImage from "../assets/images/image-inside/MadhyaPradesh.jpeg";
 import maharashtraImage from "../assets/images/image-inside/Maharashtra.jpeg";
 // import manipurImage from "../assets/images/image-inside/Manipur.jpeg";
 // import meghalayaImage from "../assets/images/image-inside/Meghalaya.jpeg";
@@ -33,7 +33,7 @@ import rajasthanImage from "../assets/images/image-inside/Rajasthan.jpeg";
 import tamilnaduImage from "../assets/images/image-inside/TamilNadu.jpeg";
 // import tripuraImage from "../assets/images/image-inside/Tripura.jpeg";
 import uttarakhandImage from "../assets/images/image-inside/Uttarakhand.jpeg";
-import upImage from "../assets/images/image-inside/UttarPradesh.jpeg";
+import uttarpradeshImage from "../assets/images/image-inside/UttarPradesh.jpeg";
 import westbengalImage from "../assets/images/image-inside/WestBengal.jpeg";
 
 const imageMapping = {
@@ -43,19 +43,19 @@ const imageMapping = {
   assam: assamImage,
   bihar: biharImage,
   // chandigarh: chandigarhImage,
-  chattisgarh: chattisgarhImage,
+  chhattisgarh: chhattisgarhImage,
   // dadraandnagar: dadraandnagarImage,
   delhi: delhiImage,
   goa: goaImage,
   gujarat: gujaratImage,
   haryana: haryanaImage,
-  himachal: himachalImage,
+  himachalpradesh: himachalpradeshImage,
+  jammuandkashmir: jammuandkashmirImage,
   jharkhand: jharkhandImage,
-  jk: jkImage,
-  Karnataka: KarnatakaImage,
+  karnataka: karnatakaImage,
   kerala: keralaImage,
   // lakshdweep: lakshdweepImage,
-  mp: mpImage,
+  madhyapradesh: madhyapradeshImage,
   maharashtra: maharashtraImage,
   // manipur: manipurImage,
   // meghalaya: meghalayaImage,
@@ -69,7 +69,7 @@ const imageMapping = {
   tamilnadu: tamilnaduImage,
   // tripura: tripuraImage,
   uttarakhand: uttarakhandImage,
-  up: upImage,
+  uttarpradesh: uttarpradeshImage,
   westbengal: westbengalImage,
 };
 
