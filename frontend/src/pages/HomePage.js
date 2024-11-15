@@ -2,6 +2,7 @@ import Hero from '../components/Hero';
 import ExploreHeritage from '../components/ExploreHeritage';
 import Map from '../components/Map';
 import ImageGrid from '../components/ImageGrid';
+import IndiaArchitecture from '../components/IndiaArchitecture';
 import Testimonial from '../components/Testimonial';
 
 const HomePage = () => {
@@ -29,10 +30,14 @@ const HomePage = () => {
         <Map />
       </section>
 
-      <section id="explore-heritage">
+      <section id="image-grid">
         <ImageGrid />
       </section>
 
+      {/* India Architecture Section */}
+      <section id="india-architecture">
+        <IndiaArchitecture />
+      </section>
 
       <section id="testimonials" className="py-0">
         <Testimonial />
