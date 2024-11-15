@@ -1,0 +1,29 @@
+.state-map-about {
+    display: flex;
+    gap: 20px; /* Space between the two sections */
+    padding: 20px;
+    background-color: #f3ece4; /* Matches the AboutState background */
+  }
+  
+  .state-map-container {
+    flex: 1; /* Takes up half the width */
+    max-width: 50%; /* Prevents it from exceeding 50% */
+  }
+  
+  .about-state-container {
+    flex: 1; /* Takes up half the width */
+    max-width: 50%; /* Prevents it from exceeding 50% */
+  }
+  
+  /* Responsive Design for Smaller Screens */
+  @media (max-width: 768px) {
+    .state-map-about {
+      flex-direction: column; /* Stack vertically */
+    }
+  
+    .state-map-container,
+    .about-state-container {
+      max-width: 100%; /* Full width for smaller screens */
+    }
+  }
+  

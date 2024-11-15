@@ -1,0 +1,36 @@
+.state-info-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Spacing between sections */
+}
+
+.state-main-content {
+  display: flex;
+  gap: 20px; /* Space between the map and the about section */
+  align-items: flex-start; /* Align items at the top */
+}
+
+.text-justify {
+    text-align: justify;
+  }  
+
+.state-map {
+  flex: 1; /* Take up one part of the width */
+  max-width: 50%; /* Ensure it doesn't exceed 50% of the width */
+}
+
+.about-state {
+  flex: 1; /* Take up one part of the width */
+  max-width: 50%; /* Ensure it doesn't exceed 50% of the width */
+}
+
+@media (max-width: 768px) {
+  .state-main-content {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+  }
+
+  .state-map,
+  .about-state {
+    max-width: 100%; /* Allow full width for smaller screens */
+  }
+}

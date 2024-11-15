@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import './PlacesToVisit.css'; // CSS file for styling
-import aboutPattern from '../assets/images/about.svg'; // Decorative pattern
+import './Culture.css'; // CSS file for styling
+import aboutPattern from '../assets/images/about.svg'; // Decorative background pattern
 
-const PlacesToVisit = ({ stateName }) => {
-  const [content, setContent] = useState("Loading places to visit...");
+const Culture = ({ stateName }) => {
+  const [content, setContent] = useState("Loading cultural information...");
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchPlacesToVisit = async () => {
+    const fetchCulture = async () => {
       try {
-        // Fetch content from Wikipedia based on the state name
+        // Wikipedia REST API call to fetch summary
         const response = await fetch(
           `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(stateName)}`
         );
@@ -20,27 +20,27 @@ const PlacesToVisit = ({ stateName }) => {
 
         const data = await response.json();
 
-        // Extract content that mentions places to visit
-        const placesContent = data.extract.includes("tourism") || data.extract.includes("places")
+        // Check for relevant cultural information
+        const culturalContent = data.extract.includes("culture") || data.extract.includes("tradition")
           ? data.extract
-          : `Tourism and places to visit information for ${stateName} is currently unavailable.`;
+          : `Cultural and traditional information for ${stateName} is currently unavailable.`;
 
-        setContent(placesContent);
+        setContent(culturalContent);
       } catch (error) {
-        console.error("Error fetching places to visit information:", error);
-        setError("Failed to load places to visit information.");
+        console.error("Error fetching cultural information:", error);
+        setError("Failed to load cultural and traditional information.");
       }
     };
 
     if (stateName) {
-      fetchPlacesToVisit();
+      fetchCulture();
     }
   }, [stateName]);
 
   if (error) {
     return (
-      <section className="places-to-visit-section py-16 bg-[#f3ece4] text-center relative overflow-hidden">
-        <h2 className="text-4xl font-bold text-[#6b4226] mb-8">Places to Visit</h2>
+      <section className="culture-section py-16 bg-[#f3ece4] text-center relative overflow-hidden">
+        <h2 className="text-4xl font-bold text-[#6b4226] mb-8">Culture & Tradition</h2>
         <p className="text-lg text-[#8c6239] max-w-5xl mx-auto text-justify leading-7">
           {error}
         </p>
@@ -49,7 +49,7 @@ const PlacesToVisit = ({ stateName }) => {
   }
 
   return (
-    <section className="places-to-visit-section py-16 bg-[#f3ece4] text-center relative overflow-hidden">
+    <section className="culture-section py-16 bg-[#f3ece4] text-center relative overflow-hidden">
       {/* Decorative Patterns */}
       <div
         className="absolute top-35 left-0 w-40 h-40 opacity-20 bg-no-repeat bg-contain"
@@ -69,7 +69,7 @@ const PlacesToVisit = ({ stateName }) => {
       ></div>
 
       {/* Section Content */}
-      <h2 className="text-4xl font-bold text-[#6b4226] mb-8">Places to Visit</h2>
+      <h2 className="text-4xl font-bold text-[#6b4226] mb-8">Culture & Tradition</h2>
       <p className="text-lg text-[#8c6239] max-w-5xl mx-auto text-justify leading-7">
         {content}
       </p>
@@ -77,4 +77,4 @@ const PlacesToVisit = ({ stateName }) => {
   );
 };
 
-export default PlacesToVisit;
+export default Culture;

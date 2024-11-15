@@ -1,0 +1,20 @@
+.geography-section {
+    padding: 20px;
+    background-color: #f3ece4;
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  
+  .geography-title {
+    font-size: 24px;
+    color: #6b4226;
+    margin-bottom: 16px;
+  }
+  
+  .geography-content {
+    font-size: 18px;
+    color: #8c6239;
+    text-align: justify;
+    line-height: 1.8;
+  }
+  

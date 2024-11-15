@@ -1,32 +1,28 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import HeroState from '../components/HeroState';
+import StateMapAbout from '../components/StateMapAbout';
 import History from '../components/History';
-import CultureTradition from '../components/CultureTradition';
-import MusicArts from '../components/ArchitectureDesign';
-import Weather from '../components/Weather';
-import PlacesToVisit from '../components/PlacesToVisit';
-import Cuisine from '../components/Cuisine';
-import StateMap from '../components/StateMap';
+import Geography from '../components/Geography';
+import Culture from '../components/Culture';
+import Weather from '../components/Weather'; // Import the Weather component
 
 const StateInfoPage = () => {
   const { stateName } = useParams(); // Get the state name from the URL
 
   return (
-    <div>
+    <div className="state-info-page">
       {/* Hero Section */}
       <HeroState stateName={stateName} />
 
-      {/* Dynamic State Map Section */}
-      <StateMap stateName={stateName} />
+      {/* State Map and About Section */}
+      <StateMapAbout stateName={stateName} />
 
-      {/* Other Sections */}
+      {/* Individual Sections */}
       <History stateName={stateName} />
-      <CultureTradition stateName={stateName} />
-      <MusicArts stateName={stateName} />
-      <Weather stateName={stateName} />
-      <PlacesToVisit stateName={stateName} />
-      <Cuisine stateName={stateName} />
+      <Geography stateName={stateName} />
+      <Weather stateName={stateName} /> {/* Add Weather Section */}
+      <Culture stateName={stateName} />
     </div>
   );
 };

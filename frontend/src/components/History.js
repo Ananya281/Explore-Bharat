@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import './History.css';
+import './History.css'; // Ensure this file matches the styling structure
+import aboutPattern from '../assets/images/about.svg'; // For decorative patterns
 
 const History = ({ placeName }) => {
   const [content, setContent] = useState("Loading historical information...");
@@ -9,7 +10,6 @@ const History = ({ placeName }) => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        // Construct the Wikipedia API URL for fetching the introduction of the specified place
         const response = await fetch(
           `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=&explaintext=&titles=${encodeURIComponent(
             placeName
@@ -17,8 +17,6 @@ const History = ({ placeName }) => {
         );
 
         const data = await response.json();
-        
-        // Access the 'extract' content from the response
         const page = data.query.pages;
         const pageContent = page[Object.keys(page)[0]].extract;
 
@@ -47,15 +45,36 @@ const History = ({ placeName }) => {
   };
 
   return (
-    <div className="history-section">
-      <h2 className="history-title">History</h2>
-      <p className="history-content">{displayedContent}</p>
+    <section className="relative history-section py-16 bg-[#f3ece4] text-center overflow-hidden">
+      {/* Decorative Flowers */}
+      <div
+        className="absolute top-35 left-0 w-40 h-40 opacity-20 bg-no-repeat bg-contain"
+        style={{
+          backgroundImage: `url(${aboutPattern})`,
+          filter:
+            'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
+        }}
+      ></div>
+      <div
+        className="absolute bottom-0 right-20 w-64 h-64 opacity-20 bg-no-repeat bg-contain"
+        style={{
+          backgroundImage: `url(${aboutPattern})`,
+          filter:
+            'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
+        }}
+      ></div>
+
+      <h2 className="text-4xl font-bold text-[#6b4226] mb-8">History {placeName}</h2>
+      <p className="text-lg text-[#8c6239] mb-6 max-w-5xl mx-auto text-justify">{displayedContent}</p>
       {content.length > 300 && (
-        <button onClick={toggleReadMore} className="read-more-button">
+        <button
+          onClick={toggleReadMore}
+          className="mt-4 px-6 py-2 text-white bg-[#6b4226] rounded-full hover:bg-[#8c6239] transition duration-300"
+        >
           {isExpanded ? "Read Less" : "Read More"}
         </button>
       )}
-    </div>
+    </section>
   );
 };
 
