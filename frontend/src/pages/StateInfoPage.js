@@ -1,5 +1,3 @@
-// src/pages/StateInfoPage.js
-
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import HeroState from '../components/HeroState';
@@ -9,7 +7,7 @@ import MusicArts from '../components/ArchitectureDesign';
 import Weather from '../components/Weather';
 import PlacesToVisit from '../components/PlacesToVisit';
 import Cuisine from '../components/Cuisine';
-import StateMap from '../components/StateMap'; // Import the StateMap component
+import StateMap from '../components/StateMap';
 
 const StateInfoPage = () => {
   const { stateName } = useParams(); // Get the state name from the URL
@@ -23,12 +21,12 @@ const StateInfoPage = () => {
       <StateMap stateName={stateName} />
 
       {/* Other Sections */}
-      <History />
-      <CultureTradition />
-      <MusicArts />
-      <Weather />
-      <PlacesToVisit />
-      <Cuisine />
+      <History stateName={stateName} />
+      <CultureTradition stateName={stateName} />
+      <MusicArts stateName={stateName} />
+      <Weather stateName={stateName} />
+      <PlacesToVisit stateName={stateName} />
+      <Cuisine stateName={stateName} />
     </div>
   );
 };
