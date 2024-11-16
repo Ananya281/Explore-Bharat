@@ -7,12 +7,21 @@ const Culture = ({ stateName }) => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    if (!stateName) {
+      setError("State name is missing.");
+      return;
+    }
+
+    // Format the state name properly
+    const formattedStateName = stateName
+      .replace(/([a-z])([A-Z])/g, '$1 $2') // Add spaces for camel-case (e.g., TamilNadu -> Tamil Nadu)
+      .replace(/_/g, ' '); // Replace underscores with spaces
+
     const fetchCulture = async () => {
       try {
-        // Wikipedia REST API call to fetch cultural information
         const response = await fetch(
           `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Culture_of_${encodeURIComponent(
-            stateName
+            formattedStateName
           )}&exintro=&explaintext=&origin=*`
         );
 
@@ -22,7 +31,7 @@ const Culture = ({ stateName }) => {
 
         const data = await response.json();
 
-        // Extracting cultural information from API response
+        // Extracting cultural information from the API response
         const page = Object.values(data.query.pages)[0];
         const extract = page?.extract;
 
@@ -30,7 +39,7 @@ const Culture = ({ stateName }) => {
           setContent(extract);
         } else {
           setContent(
-            `Cultural and traditional information for ${stateName} is currently unavailable.`
+            `Cultural and traditional information for ${formattedStateName} is currently unavailable.`
           );
         }
       } catch (error) {
@@ -39,14 +48,12 @@ const Culture = ({ stateName }) => {
       }
     };
 
-    if (stateName) {
-      fetchCulture();
-    }
+    fetchCulture();
   }, [stateName]);
 
   if (error) {
     return (
-      <section className="culture-section relative history-section py-16 bg-[#f3ece4] text-center overflow-hidden">
+      <section className="culture-section relative py-16 bg-[#f3ece4] text-center overflow-hidden">
         <h2 className="text-4xl font-bold text-[#6b4226] mb-8">Culture & Tradition</h2>
         <p className="text-lg text-[#8c6239] max-w-5xl mx-auto text-justify leading-7">
           {error}
