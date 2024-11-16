@@ -6,7 +6,7 @@ import History from '../components/History';
 import Geography from '../components/Geography';
 import Culture from '../components/Culture';
 import Weather from '../components/Weather'; // Import the Weather component
-import Cuisine from '../components/Cuisine';
+// import Cuisine from '../components/Cuisine';
 
 const StateInfoPage = () => {
   const { stateName } = useParams(); // Get the state name from the URL
@@ -24,7 +24,7 @@ const StateInfoPage = () => {
       <Geography stateName={stateName} />
       <Weather stateName={stateName} /> {/* Add Weather Section */}
       <Culture stateName={stateName} />
-      <Cuisine stateName={stateName} />
+      {/* <Cuisine stateName={stateName} /> */}
     </div>
   );
 };
