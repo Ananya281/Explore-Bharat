@@ -16,7 +16,7 @@ const Testimonial = () => {
   return (
     <div className="testimonial-container">
     {/* Black Overlay */}
-    <div className="absolute inset-0 bg-black opacity-50"></div>
+    <div className="absolute inset-0 bg-black opacity-70"></div>
     <div className="relative z-10">
       <h2 className="text-4xl font-bold text-[#f3ece4] mb-12">What Our Users Say</h2>
       <div className="testimonial-scroller">

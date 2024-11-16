@@ -1,14 +1,24 @@
-// src/pages/MonumentsPage.js
 import React from 'react';
 import CardsHero from '../components/CardHero'; // Adjust the path if necessary
 import HexagonGallery from '../components/HexagonGallery'; // Import the HexagonGallery component
 import monumentsVideo from '../assets/videos/monuments.mp4'; // Import the monuments video
 
-// Import images
+// Import images for monument cards
 import tajMahalImage from '../assets/images/tajmahal.jpeg';
 import goldenTempleImage from '../assets/images/goldentemple.jpeg';
 import hawaMahalImage from '../assets/images/hawamahal.jpeg';
 import agraFortImage from '../assets/images/agrafort.jpeg';
+
+// Dynamically import images for HexagonGallery
+const hexagonImages = [
+  require('../assets/images/image-monuments/mon1.jpeg'),
+  require('../assets/images/image-monuments/mon2.jpeg'),
+  require('../assets/images/image-monuments/mon3.jpeg'),
+  require('../assets/images/image-monuments/mon4.jpeg'),
+  require('../assets/images/image-monuments/mon5.jpeg'),
+  require('../assets/images/image-monuments/mon6.jpeg'),
+  require('../assets/images/image-monuments/mon7.jpeg'),
+];
 
 const monumentData = [
   {
@@ -75,8 +85,8 @@ const MonumentsPage = () => {
 
         {/* Hexagonal Image Gallery */}
         <div className="mt-12">
-          <h2 className="text-3xl font-semibold text-center text-[#6b4226] mb-6">Photo Gallary</h2>
-          <HexagonGallery />
+          <h2 className="text-3xl font-semibold text-center text-[#6b4226] mb-6">Photo Gallery</h2>
+          <HexagonGallery images={hexagonImages} />
         </div>
       </div>
     </div>

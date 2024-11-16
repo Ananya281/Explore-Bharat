@@ -1,4 +1,3 @@
-// src/pages/CuisinePage.js
 import React from 'react';
 import CardsHero from '../components/CardHero';
 import HexagonGallery from '../components/HexagonGallery'; // Import the HexagonGallery component
@@ -9,6 +8,17 @@ import biryaniImage from '../assets/images/biryani.jpeg';
 import dosaImage from '../assets/images/dosa.jpeg';
 import chaatImage from '../assets/images/chaat.jpeg';
 import samosaImage from '../assets/images/samosa.jpeg';
+
+// Dynamically import images for HexagonGallery
+const hexagonImages = [
+  require('../assets/images/image-cuisines/cui1.jpeg'),
+  require('../assets/images/image-cuisines/cui2.jpeg'),
+  require('../assets/images/image-cuisines/cui3.jpeg'),
+  require('../assets/images/image-cuisines/cui4.jpeg'),
+  require('../assets/images/image-cuisines/cui5.jpeg'),
+  require('../assets/images/image-cuisines/cui6.jpeg'),
+  require('../assets/images/image-cuisines/cui7.jpeg'),
+];
 
 const cuisineData = [
   {
@@ -75,8 +85,8 @@ const CuisinePage = () => {
 
         {/* Hexagonal Image Gallery */}
         <div className="mt-12">
-          <h2 className="text-3xl font-semibold text-center text-[#6b4226] mb-6">Image Gallary</h2>
-          <HexagonGallery />
+          <h2 className="text-3xl font-semibold text-center text-[#6b4226] mb-6">Image Gallery</h2>
+          <HexagonGallery images={hexagonImages} />
         </div>
       </div>
     </div>

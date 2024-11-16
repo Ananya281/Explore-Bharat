@@ -35,7 +35,7 @@
   border-radius: 10px;
   transform: translateX(-220px); /* Hidden initially */
   transition: transform 0.3s ease-in-out;
-  z-index: 40;
+  z-index: 100;
 }
 
 .vertical-navbar.open {

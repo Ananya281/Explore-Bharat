@@ -1,14 +1,24 @@
-// src/pages/ArtAndCraftsPage.js
 import React from 'react';
 import CardsHero from '../components/CardHero'; // Adjust the path if necessary
 import HexagonGallery from '../components/HexagonGallery'; // Import the HexagonGallery component
 import artsVideo from '../assets/videos/arts.mp4'; // Import the arts video
 
-// Import images for the art gallery (replace with actual paths)
+// Import images for the art cards
 import madhubaniImage from '../assets/images/madhubani.jpeg';
 import warliImage from '../assets/images/warli.jpeg';
 import pattachitraImage from '../assets/images/pattachitra.jpeg';
 import kathakImage from '../assets/images/kathak.jpeg';
+
+// Dynamically import images for HexagonGallery
+const hexagonImages = [
+  require('../assets/images/image-arts/art1.jpeg'),
+  require('../assets/images/image-arts/art2.jpeg'),
+  require('../assets/images/image-arts/art3.jpeg'),
+  require('../assets/images/image-arts/art4.jpeg'),
+  require('../assets/images/image-arts/art5.jpeg'),
+  require('../assets/images/image-arts/art6.jpeg'),
+  require('../assets/images/image-arts/art7.jpeg'),
+];
 
 const artData = [
   {
@@ -76,7 +86,7 @@ const ArtAndCraftsPage = () => {
         {/* Hexagonal Image Gallery */}
         <div className="mt-12">
           <h2 className="text-3xl font-semibold text-center text-[#6b4226] mb-6">Gallery of Indian Art and Crafts</h2>
-          <HexagonGallery />
+          <HexagonGallery images={hexagonImages} />
         </div>
       </div>
     </div>

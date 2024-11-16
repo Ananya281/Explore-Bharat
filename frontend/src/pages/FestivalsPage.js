@@ -1,14 +1,24 @@
-// src/pages/FestivalsPage.js
 import React from 'react';
 import CardsHero from '../components/CardHero';
 import HexagonGallery from '../components/HexagonGallery'; // Import the HexagonGallery component
 import festivalsVideo from '../assets/videos/festivals.mp4';
 
-// Import images
+// Import images for the festival cards
 import panFestivalImage from '../assets/images/panfestival.jpeg';
 import folkFestivalImage from '../assets/images/folkfestival.jpeg';
 import tribalFestivalImage from '../assets/images/tribalfestival.jpeg';
 import fairFestivalImage from '../assets/images/fairfestival.jpeg';
+
+// Dynamically import images for the HexagonGallery
+const hexagonImages = [
+  require('../assets/images/image-festivals/fes1.jpeg'),
+  require('../assets/images/image-festivals/fes2.jpeg'),
+  require('../assets/images/image-festivals/fes3.jpeg'),
+  require('../assets/images/image-festivals/fes4.jpeg'),
+  require('../assets/images/image-festivals/fes5.jpeg'),
+  require('../assets/images/image-festivals/fes6.jpeg'),
+  require('../assets/images/image-festivals/fes7.jpeg'),
+];
 
 const festivalData = [
   {
@@ -74,8 +84,8 @@ const FestivalsPage = () => {
 
         {/* Hexagonal Image Gallery */}
         <div className="mt-12">
-          <h2 className="text-3xl font-semibold text-center text-[#6b4226] mb-6">Image Gallary</h2>
-          <HexagonGallery />
+          <h2 className="text-3xl font-semibold text-center text-[#6b4226] mb-6">Image Gallery</h2>
+          <HexagonGallery images={hexagonImages} />
         </div>
       </div>
     </div>

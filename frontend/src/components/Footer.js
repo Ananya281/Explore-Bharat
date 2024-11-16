@@ -23,7 +23,7 @@ const Footer = () => {
         }}
       ></div>
 
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-16 text-center md:text-left relative z-10">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-16 text-center md:text-left relative z-5">
         {/* About Section */}
         <div>
           <h3 className="font-bold text-xl mb-4 lg:mb-6">Explore Bharat</h3>
