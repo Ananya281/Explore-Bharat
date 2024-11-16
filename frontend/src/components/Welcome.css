@@ -1,31 +1,69 @@
 .welcome-section {
-    position: relative;
-    height: 500px; /* Adjust height as needed */
-    color: white;
-  }
-  
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7); /* Reduced transparency for better readability */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .overlay h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .overlay p {
-    font-size: 1.2rem;
-    max-width: 80%;
-  }
-  
+  position: relative;
+  height: 100vh; /* Full-screen height */
+  width: 100%; /* Full width */
+  color: white;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Prevents overflowing elements */
+  z-index: 1; /* Ensures it's above the SVG divider */
+}
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark transparent overlay */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 1; /* Place above the background image */
+}
+
+/* Text Content */
+.overlay h1 {
+  font-size: 4rem;
+  margin: 0;
+  font-family: 'Playfair Display', serif; /* Elegant font */
+  z-index: 2; /* Ensure it's above the overlay */
+}
+
+.overlay p {
+  font-size: 1.5rem;
+  margin-top: 10px;
+  font-family: 'Playfair Display', serif;
+  z-index: 2;
+  max-width: 800px;
+  text-align: center;
+}
+
+/* Curvy SVG Divider */
+.svg-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  height: 100px; /* Adjust as needed */
+  z-index: 0; /* Ensures it stays behind other elements */
+}
+
+.svg-divider path {
+  fill: #f3ece4; /* Matches the theme's light beige color */
+}
+
+/* Adjacent Section Styling */
+section {
+  margin: 0;
+  padding: 0;
+}

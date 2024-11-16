@@ -14,17 +14,36 @@ const StateInfoPage = () => {
   return (
     <div className="state-info-page">
       {/* Hero Section */}
-      <HeroState stateName={stateName} />
+      <div id="hero">
+        <HeroState stateName={stateName} />
+      </div>
 
       {/* State Map and About Section */}
-      <StateMapAbout stateName={stateName} />
+      <div id="statemapabout">
+        <StateMapAbout stateName={stateName} />
+      </div>
 
       {/* Individual Sections */}
-      <History stateName={stateName} />
-      <Geography stateName={stateName} />
-      <Weather stateName={stateName} /> {/* Add Weather Section */}
-      <Culture stateName={stateName} />
-      {/* <Cuisine stateName={stateName} /> */}
+      <div id="history">
+        <History stateName={stateName} />
+      </div>
+
+      <div id="geography">
+        <Geography stateName={stateName} />
+      </div>
+
+      <div id="weather">
+        <Weather stateName={stateName} /> {/* Add Weather Section */}
+      </div>
+
+      <div id="culture">
+        <Culture stateName={stateName} />
+      </div>
+
+      {/* Uncomment the Cuisine Section if needed */}
+      {/* <div id="cuisine">
+        <Cuisine stateName={stateName} />
+      </div> */}
     </div>
   );
 };

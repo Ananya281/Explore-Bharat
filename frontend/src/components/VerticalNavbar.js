@@ -18,13 +18,12 @@ const VerticalNavbar = ({ stateName }) => {
       {/* Vertical Navbar */}
       <div className={`vertical-navbar ${isOpen ? 'open' : ''}`}>
         <ul>
-          <li><a href="#hero" onClick={toggleNavbar}>Home</a></li>
-          <li><a href="#map" onClick={toggleNavbar}>Map & About</a></li>
+          <li><a href="/" onClick={toggleNavbar}>Home</a></li>
+          <li><a href="#statemapabout" onClick={toggleNavbar}>Map & About</a></li>
           <li><a href="#history" onClick={toggleNavbar}>History</a></li>
           <li><a href="#geography" onClick={toggleNavbar}>Geography</a></li>
           <li><a href="#weather" onClick={toggleNavbar}>Weather</a></li>
           <li><a href="#culture" onClick={toggleNavbar}>Culture</a></li>
-          <li><a href="#cuisine" onClick={toggleNavbar}>Cuisine</a></li>
         </ul>
       </div>
     </>
