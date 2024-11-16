@@ -1,38 +1,53 @@
 import React, { useEffect, useState } from 'react';
-import './History.css'; // Ensure this file matches the styling structure
-import aboutPattern from '../assets/images/about.svg'; // For decorative patterns
+import './History.css'; // Ensure this file is correctly linked in the component
+import aboutPattern from '../assets/images/about.svg'; // Ensure the path and file name are correct
 
-const History = ({ placeName }) => {
+const History = ({ stateName }) => {
   const [content, setContent] = useState("Loading historical information...");
   const [isExpanded, setIsExpanded] = useState(false);
   const [displayedContent, setDisplayedContent] = useState("");
 
   useEffect(() => {
+    console.log('stateName:', stateName); // Log to check if stateName is passed correctly
+
+    if (!stateName) {
+      setContent("No place specified.");
+      return; // Prevent fetch if no stateName is provided
+    }
+
     const fetchHistory = async () => {
       try {
         const response = await fetch(
           `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=&explaintext=&titles=${encodeURIComponent(
-            placeName
+            stateName
           )}&format=json&origin=*`
         );
+        
+        if (!response.ok) {
+          setContent("Failed to load historical information.");
+          return;
+        }
 
         const data = await response.json();
         const page = data.query.pages;
-        const pageContent = page[Object.keys(page)[0]].extract;
+        const pageContent = page[Object.keys(page)[0]]?.extract;
 
-        setContent(pageContent || "No historical information available.");
+        if (pageContent) {
+          setContent(pageContent);
+        } else {
+          setContent("No historical information available.");
+        }
       } catch (error) {
         console.error('Error fetching historical information:', error);
         setContent("Failed to load historical information.");
       }
     };
 
-    if (placeName) {
-      fetchHistory();
-    }
-  }, [placeName]);
+    fetchHistory();
+  }, [stateName]); // Re-run effect whenever stateName changes
 
   useEffect(() => {
+    // Display truncated or full content based on the expansion state
     if (isExpanded) {
       setDisplayedContent(content);
     } else {
@@ -64,7 +79,7 @@ const History = ({ placeName }) => {
         }}
       ></div>
 
-      <h2 className="text-4xl font-bold text-[#6b4226] mb-8">History {placeName}</h2>
+      <h2 className="text-4xl font-bold text-[#6b4226] mb-8">History of {stateName}</h2>
       <p className="text-lg text-[#8c6239] mb-6 max-w-5xl mx-auto text-justify">{displayedContent}</p>
       {content.length > 300 && (
         <button
