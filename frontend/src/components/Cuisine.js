@@ -1,54 +1,53 @@
 import React, { useEffect, useState } from 'react';
-import './Cuisine.css'; // CSS file for styling
-import aboutPattern from '../assets/images/about.svg'; // Decorative background pattern
+import './Cuisine.css'; // Ensure this file is correctly linked in the component
+import aboutPattern from '../assets/images/about.svg'; // Ensure the path and file name are correct
 
 const Cuisine = ({ stateName }) => {
-  const [content, setContent] = useState("Loading cuisine information...");
+  const [content, setContent] = useState("Loading Cuisine information...");
   const [isExpanded, setIsExpanded] = useState(false);
   const [displayedContent, setDisplayedContent] = useState("");
-  const [error, setError] = useState("");
 
   useEffect(() => {
+    console.log('stateName:', stateName); // Log to check if stateName is passed correctly
+
     if (!stateName) {
-      setContent("No state specified.");
-      return; // Prevent API call if no stateName is provided
+      setContent("No place specified.");
+      return; // Prevent fetch if no stateName is provided
     }
 
     const fetchCuisine = async () => {
       try {
-        // Wikipedia API to fetch cuisine information
         const response = await fetch(
           `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Cuisine_of_${encodeURIComponent(
             stateName
           )}&exintro=&explaintext=&origin=*`
         );
-
+        
         if (!response.ok) {
-          throw new Error("Failed to fetch content from Wikipedia.");
+          setContent("Failed to load Cuisine information.");
+          return;
         }
 
         const data = await response.json();
-        const page = Object.values(data.query.pages)[0];
-        const extract = page?.extract;
+        const page = data.query.pages;
+        const pageContent = page[Object.keys(page)[0]]?.extract;
 
-        if (extract) {
-          setContent(extract);
+        if (pageContent) {
+          setContent(pageContent);
         } else {
-          setContent(
-            `Cuisine information for ${stateName} is currently unavailable.`
-          );
+          setContent("No Cuisine information available.");
         }
       } catch (error) {
-        console.error("Error fetching cuisine information:", error);
-        setError("Failed to load cuisine information.");
+        console.error('Error fetching Cuisine information:', error);
+        setContent("Failed to load Cuisine information.");
       }
     };
 
     fetchCuisine();
-  }, [stateName]);
+  }, [stateName]); // Re-run effect whenever stateName changes
 
   useEffect(() => {
-    // Truncate content or show full based on isExpanded
+    // Display truncated or full content based on the expansion state
     if (isExpanded) {
       setDisplayedContent(content);
     } else {
@@ -60,26 +59,15 @@ const Cuisine = ({ stateName }) => {
     setIsExpanded(!isExpanded);
   };
 
-  if (error) {
-    return (
-      <section className="cuisine-section relative py-16 bg-[#fff8e1] text-center overflow-hidden">
-        <h2 className="text-4xl font-bold text-[#d17b00] mb-8">Cuisine</h2>
-        <p className="text-lg text-[#f57c00] max-w-5xl mx-auto text-justify leading-7">
-          {error}
-        </p>
-      </section>
-    );
-  }
-
   return (
-    <section className="cuisine-section relative py-16 bg-[#fff8e1] text-center overflow-hidden">
-      {/* Decorative Patterns */}
+    <section className="relative history-section py-16 bg-[#f3ece4] text-center overflow-hidden">
+      {/* Decorative Flowers */}
       <div
         className="absolute top-35 left-0 w-40 h-40 opacity-20 bg-no-repeat bg-contain"
         style={{
           backgroundImage: `url(${aboutPattern})`,
           filter:
-            'brightness(0) saturate(100%) invert(73%) sepia(35%) saturate(609%) hue-rotate(359deg) brightness(99%) contrast(95%)',
+            'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
         }}
       ></div>
       <div
@@ -87,19 +75,16 @@ const Cuisine = ({ stateName }) => {
         style={{
           backgroundImage: `url(${aboutPattern})`,
           filter:
-            'brightness(0) saturate(100%) invert(73%) sepia(35%) saturate(609%) hue-rotate(359deg) brightness(99%) contrast(95%)',
+            'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
         }}
       ></div>
 
-      {/* Section Content */}
-      <h2 className="text-4xl font-bold text-[#d17b00] mb-8">Cuisine</h2>
-      <p className="text-lg text-[#f57c00] mb-6 max-w-5xl mx-auto text-justify leading-8">
-        {displayedContent}
-      </p>
+      <h2 className="text-4xl font-bold text-[#6b4226] mb-8">Cuisine of {stateName}</h2>
+      <p className="text-lg text-[#8c6239] mb-6 max-w-5xl mx-auto text-justify">{displayedContent}</p>
       {content.length > 300 && (
         <button
           onClick={toggleReadMore}
-          className="mt-6 px-8 py-3 text-white bg-[#d17b00] rounded-full hover:bg-[#f57c00] transition duration-300"
+          className="mt-4 px-6 py-2 text-white bg-[#6b4226] rounded-full hover:bg-[#8c6239] transition duration-300"
         >
           {isExpanded ? "Read Less" : "Read More"}
         </button>

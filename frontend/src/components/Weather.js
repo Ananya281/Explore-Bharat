@@ -6,10 +6,14 @@ const Weather = ({ stateName }) => {
   const [loading, setLoading] = useState(true); // State to track loading
   const [error, setError] = useState(null); // State to handle errors
 
+  const API_KEY = 'EKrOrmCDqUPS1I2aqAu9LL7MkVOXXHMs'; // Replace with your actual API key
+
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        const API_KEY = 'EKrOrmCDqUPS1I2aqAu9LL7MkVOXXHMs'; // Replace with your actual API key
+        setLoading(true); // Start loading
+        setError(null); // Reset error state
+
         const url = `https://api.tomorrow.io/v4/weather/realtime?location=${encodeURIComponent(
           stateName
         )}&apikey=${API_KEY}`;
@@ -21,15 +25,17 @@ const Weather = ({ stateName }) => {
         }
 
         const data = await response.json();
-        setWeatherData(data); // Store the entire response data
-        setLoading(false);
+        setWeatherData(data); // Store the response data
       } catch (err) {
-        setError(err.message);
-        setLoading(false);
+        setError(err.message); // Capture error message
+      } finally {
+        setLoading(false); // End loading
       }
     };
 
-    fetchWeather();
+    if (stateName) {
+      fetchWeather();
+    }
   }, [stateName]);
 
   if (loading) {
@@ -40,19 +46,19 @@ const Weather = ({ stateName }) => {
     return <div className="weather-section">Error: {error}</div>;
   }
 
-  // Safely access data values
+  // Safely access weather data
   const temperature = weatherData?.data?.values?.temperature;
   const condition = weatherData?.data?.values?.weatherCode;
   const humidity = weatherData?.data?.values?.humidity;
   const windSpeed = weatherData?.data?.values?.windSpeed;
 
   return (
-    <section className="relative weather-section py-16 bg-[#f3ece4] text-center overflow-hidden">
+    <section className="weather-section py-16 bg-[#f3ece4] text-center overflow-hidden">
       {/* Decorative Patterns */}
       <div
         className="absolute top-35 left-0 w-40 h-40 opacity-20 bg-no-repeat bg-contain"
         style={{
-          backgroundImage: 'url(/path-to-pattern.svg)', // Replace with actual pattern file path
+          backgroundImage: 'url(/path-to-pattern.svg)', // Replace with the actual path
           filter:
             'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
         }}
