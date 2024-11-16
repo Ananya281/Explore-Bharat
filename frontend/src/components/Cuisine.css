@@ -1,0 +1,63 @@
+.cuisine-section {
+    position: relative;
+    padding: 20px;
+    background-color: #fff8e1; /* Light yellow background */
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .cuisine-section h2 {
+    font-size: 36px;
+    color: #d17b00; /* Dark orange */
+    margin-bottom: 16px;
+  }
+  
+  .cuisine-section p {
+    font-size: 18px;
+    color: #f57c00; /* Bright orange */
+    line-height: 1.8;
+    margin-bottom: 12px;
+    text-align: justify;
+    max-width: 800px;
+    margin: 0 auto; /* Centers the paragraph */
+  }
+  
+  .cuisine-section button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #d17b00;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .cuisine-section button:hover {
+    background-color: #f57c00;
+  }
+  
+  /* Decorative Patterns */
+  .cuisine-section .pattern-top-left,
+  .cuisine-section .pattern-bottom-right {
+    position: absolute;
+    opacity: 0.2;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  
+  .cuisine-section .pattern-top-left {
+    top: 35px;
+    left: 0;
+    width: 160px;
+    height: 160px;
+  }
+  
+  .cuisine-section .pattern-bottom-right {
+    bottom: 0;
+    right: 20px;
+    width: 256px;
+    height: 256px;
+  }
+  

@@ -18,9 +18,9 @@ const History = ({ stateName }) => {
     const fetchHistory = async () => {
       try {
         const response = await fetch(
-          `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=&explaintext=&titles=${encodeURIComponent(
+          `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=History_of_${encodeURIComponent(
             stateName
-          )}&format=json&origin=*`
+          )}&exintro=&explaintext=&origin=*`
         );
         
         if (!response.ok) {

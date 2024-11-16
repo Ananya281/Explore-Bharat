@@ -9,9 +9,11 @@ const Culture = ({ stateName }) => {
   useEffect(() => {
     const fetchCulture = async () => {
       try {
-        // Wikipedia REST API call to fetch summary
+        // Wikipedia REST API call to fetch cultural information
         const response = await fetch(
-          `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(stateName)}`
+          `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Culture_of_${encodeURIComponent(
+            stateName
+          )}&exintro=&explaintext=&origin=*`
         );
 
         if (!response.ok) {
@@ -20,12 +22,17 @@ const Culture = ({ stateName }) => {
 
         const data = await response.json();
 
-        // Check for relevant cultural information
-        const culturalContent = data.extract.includes("culture") || data.extract.includes("tradition")
-          ? data.extract
-          : `Cultural and traditional information for ${stateName} is currently unavailable.`;
+        // Extracting cultural information from API response
+        const page = Object.values(data.query.pages)[0];
+        const extract = page?.extract;
 
-        setContent(culturalContent);
+        if (extract) {
+          setContent(extract);
+        } else {
+          setContent(
+            `Cultural and traditional information for ${stateName} is currently unavailable.`
+          );
+        }
       } catch (error) {
         console.error("Error fetching cultural information:", error);
         setError("Failed to load cultural and traditional information.");
@@ -39,7 +46,7 @@ const Culture = ({ stateName }) => {
 
   if (error) {
     return (
-      <section className="culture-section py-16 bg-[#f3ece4] text-center relative overflow-hidden">
+      <section className="culture-section relative history-section py-16 bg-[#f3ece4] text-center overflow-hidden">
         <h2 className="text-4xl font-bold text-[#6b4226] mb-8">Culture & Tradition</h2>
         <p className="text-lg text-[#8c6239] max-w-5xl mx-auto text-justify leading-7">
           {error}

@@ -1,22 +1,57 @@
 .weather-section {
-    position: relative;
-    padding: 20px;
-    background-color: #f3ece4;
-    border-radius: 8px;
-    margin: 20px 0;
-    overflow: hidden;
-  }
-  
-  .weather-section h2 {
-    font-size: 36px;
-    color: #6b4226;
-    margin-bottom: 16px;
-  }
-  
-  .weather-content p {
-    font-size: 18px;
-    color: #8c6239;
-    line-height: 1.8;
-    margin: 5px 0;
-  }
-  
+  position: relative;
+  padding: 20px;
+  background-color: #f3ece4; /* Light beige background */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.weather-section h2 {
+  font-size: 36px;
+  color: #6b4226; /* Dark brown color for the heading */
+  margin-bottom: 16px;
+}
+
+.weather-info p {
+  font-size: 18px;
+  color: #8c6239; /* Medium brown color for text */
+  line-height: 1.8;
+  margin-bottom: 12px;
+  text-align: justify;
+}
+
+.weather-info span {
+  font-weight: bold;
+  color: #6b4226; /* Highlight key data in dark brown */
+}
+
+.weather-section .loading,
+.weather-section .error {
+  font-size: 18px;
+  color: #d32f2f; /* Red for errors and notices */
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* Decorative Patterns */
+.weather-section .pattern-top-left,
+.weather-section .pattern-bottom-right {
+  position: absolute;
+  opacity: 0.2;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.weather-section .pattern-top-left {
+  top: 35px;
+  left: 0;
+  width: 160px;
+  height: 160px;
+}
+
+.weather-section .pattern-bottom-right {
+  bottom: 0;
+  right: 20px;
+  width: 256px;
+  height: 256px;
+}

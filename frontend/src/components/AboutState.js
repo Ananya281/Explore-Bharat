@@ -79,7 +79,7 @@ const AboutState = ({ stateName }) => {
       ></div>
 
       <h2 className="text-4xl font-bold text-[#6b4226] mb-8">About {stateName}</h2>
-      <p className="text-lg text-[#8c6239] mb-6 max-w-5xl mx-auto">{summary}</p>
+      <p className="text-lg text-[#8c6239] mb-6 max-w-5xl mx-auto text-justify">{summary}</p>
     </section>
   );
 };
