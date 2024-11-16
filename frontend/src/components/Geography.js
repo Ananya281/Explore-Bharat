@@ -15,14 +15,18 @@ const Geography = ({ stateName }) => {
       return; // Prevent fetch if no stateName is provided
     }
 
+    const formattedStateName = stateName
+      .replace(/([a-z])([A-Z])/g, '$1 $2') // Add space between camel-case words like TamilNadu
+      .replace(/_/g, ' '); // Replace underscores with spaces (if any)
+
     const fetchGeography = async () => {
       try {
         const response = await fetch(
           `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Climate_of_${encodeURIComponent(
-            stateName
+            formattedStateName
           )}&exintro=&explaintext=&origin=*`
         );
-        
+
         if (!response.ok) {
           setContent("Failed to load Geographical information.");
           return;
@@ -60,7 +64,7 @@ const Geography = ({ stateName }) => {
   };
 
   return (
-    <section className="relative history-section py-16 bg-[#f3ece4] text-center overflow-hidden">
+    <section className="relative geography-section py-16 bg-[#f3ece4] text-center overflow-hidden">
       {/* Decorative Flowers */}
       <div
         className="absolute top-35 left-0 w-40 h-40 opacity-20 bg-no-repeat bg-contain"

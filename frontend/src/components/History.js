@@ -15,14 +15,18 @@ const History = ({ stateName }) => {
       return; // Prevent fetch if no stateName is provided
     }
 
+    const formattedStateName = stateName
+      .replace(/([a-z])([A-Z])/g, '$1 $2') // Add space between camel-case words like TamilNadu
+      .replace(/_/g, ' '); // Replace underscores with spaces (if any)
+
     const fetchHistory = async () => {
       try {
         const response = await fetch(
           `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=History_of_${encodeURIComponent(
-            stateName
+            formattedStateName
           )}&exintro=&explaintext=&origin=*`
         );
-        
+
         if (!response.ok) {
           setContent("Failed to load historical information.");
           return;
