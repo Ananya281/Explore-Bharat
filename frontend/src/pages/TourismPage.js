@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Welcome from '../components/Welcome';
 import History from '../components/History';
-import ArchitectureAndDesign from '../components/ArchitectureDesign';
+import Culture from '../components/Culture';
 import PlacesToVisit from '../components/PlacesToVisit';
 
 const TourismPage = () => {
@@ -14,8 +14,9 @@ const TourismPage = () => {
   return (
     <div className="tourism-page">
       <Welcome placeName={predictedClass} />
-      <History placeName={predictedClass} />
-      <ArchitectureAndDesign placeName={predictedClass} />
+      {/* Pass predictedClass as stateName for History */}
+      <History stateName={predictedClass} />
+      <Culture stateName={predictedClass} />
       <PlacesToVisit placeName={predictedClass} />
     </div>
   );

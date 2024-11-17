@@ -34,12 +34,14 @@ const History = ({ stateName }) => {
 
         const data = await response.json();
         const page = data.query.pages;
-        const pageContent = page[Object.keys(page)[0]]?.extract;
+        const historyContent = page[Object.keys(page)[0]]?.extract;
 
-        if (pageContent) {
-          setContent(pageContent);
+        if (historyContent) {
+          setContent(historyContent);
         } else {
-          setContent("No historical information available.");
+          // If "History_of_{stateName}" does not exist, fetch general page
+          console.log(`History of ${stateName} not found. Trying ${stateName}.`);
+          fetchGeneralInfo(stateName);
         }
       } catch (error) {
         console.error('Error fetching historical information:', error);
@@ -49,6 +51,24 @@ const History = ({ stateName }) => {
 
     fetchHistory();
   }, [stateName]); // Re-run effect whenever stateName changes
+
+  const fetchGeneralInfo = async (name) => {
+    try {
+      const response = await fetch(
+        `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name)}`
+      );
+  
+      if (!response.ok) {
+        throw new Error("Failed to fetch general information.");
+      }
+  
+      const data = await response.json();
+      setContent(data.extract || "No general information available.");
+    } catch (error) {
+      console.error('Error fetching general information:', error);
+      setContent("Failed to load general information.");
+    }
+  };
 
   useEffect(() => {
     // Display truncated or full content based on the expansion state
