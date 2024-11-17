@@ -1,30 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import './History.css'; // Ensure this file is correctly linked in the component
-import aboutPattern from '../assets/images/about.svg'; // Ensure the path and file name are correct
+import React, { useEffect, useState } from "react";
+import "./History.css"; // Ensure this file is correctly linked
+import aboutPattern from "../assets/images/about.svg"; // Ensure the path and file name are correct
 
 const History = ({ stateName }) => {
   const [content, setContent] = useState("Loading historical information...");
   const [isExpanded, setIsExpanded] = useState(false);
   const [displayedContent, setDisplayedContent] = useState("");
 
-  useEffect(() => {
-    console.log('stateName:', stateName); // Log to check if stateName is passed correctly
+  // Helper function to format the state name
+  const formatStateName = (name) => {
+    return name
+      .replace(/_/g, " ") // Replace underscores with spaces
+      .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize each word
+  };
 
+  const formattedStateName = stateName ? formatStateName(stateName) : "";
+
+  useEffect(() => {
     if (!stateName) {
       setContent("No place specified.");
-      return; // Prevent fetch if no stateName is provided
+      return;
     }
 
-    const formattedStateName = stateName
-      .replace(/([a-z])([A-Z])/g, '$1 $2') // Add space between camel-case words like TamilNadu
-      .replace(/_/g, ' '); // Replace underscores with spaces (if any)
-
-    const fetchHistory = async () => {
+    const fetchHistorySection = async () => {
       try {
         const response = await fetch(
-          `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=History_of_${encodeURIComponent(
-            formattedStateName
-          )}&exintro=&explaintext=&origin=*`
+          `https://en.wikipedia.org/api/rest_v1/page/html/${encodeURIComponent(
+            stateName
+          )}`
         );
 
         if (!response.ok) {
@@ -32,50 +35,61 @@ const History = ({ stateName }) => {
           return;
         }
 
-        const data = await response.json();
-        const page = data.query.pages;
-        const historyContent = page[Object.keys(page)[0]]?.extract;
+        const htmlText = await response.text();
 
-        if (historyContent) {
-          setContent(historyContent);
+        // Parse the HTML and extract the "History" section
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText, "text/html");
+        const historyHeader = Array.from(
+          doc.querySelectorAll("h2, h3")
+        ).find((header) =>
+          header.textContent.toLowerCase().includes("history")
+        );
+
+        if (historyHeader) {
+          const historyContent = [];
+          let nextSibling = historyHeader.nextElementSibling;
+          while (nextSibling && nextSibling.tagName !== "H2") {
+            historyContent.push(nextSibling.outerHTML);
+            nextSibling = nextSibling.nextElementSibling;
+          }
+
+          // Join the extracted content
+          let fullContent = historyContent.join("");
+
+          // Skip unwanted lines or paragraphs
+          const tempDiv = document.createElement("div");
+          tempDiv.innerHTML = fullContent;
+
+          // Remove the first two lines or paragraphs
+          const paragraphs = Array.from(tempDiv.querySelectorAll("p"));
+          const filteredContent = paragraphs
+            .slice(0) // Skip the first two paragraphs
+            .map((el) => el.outerHTML)
+            .join("");
+
+          setContent(
+            filteredContent || "No detailed historical information available."
+          );
         } else {
-          // If "History_of_{stateName}" does not exist, fetch general page
-          console.log(`History of ${stateName} not found. Trying ${stateName}.`);
-          fetchGeneralInfo(stateName);
+          setContent("No history section found.");
         }
       } catch (error) {
-        console.error('Error fetching historical information:', error);
+        console.error("Error fetching historical section:", error);
         setContent("Failed to load historical information.");
       }
     };
 
-    fetchHistory();
-  }, [stateName]); // Re-run effect whenever stateName changes
-
-  const fetchGeneralInfo = async (name) => {
-    try {
-      const response = await fetch(
-        `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name)}`
-      );
-  
-      if (!response.ok) {
-        throw new Error("Failed to fetch general information.");
-      }
-  
-      const data = await response.json();
-      setContent(data.extract || "No general information available.");
-    } catch (error) {
-      console.error('Error fetching general information:', error);
-      setContent("Failed to load general information.");
-    }
-  };
+    fetchHistorySection();
+  }, [stateName]);
 
   useEffect(() => {
-    // Display truncated or full content based on the expansion state
     if (isExpanded) {
       setDisplayedContent(content);
     } else {
-      setDisplayedContent(content.substring(0, 300) + (content.length > 300 ? "..." : ""));
+      setDisplayedContent(
+        content.substring(0, 2400) + (content.length > 200 ? "..." : "")
+      );
     }
   }, [content, isExpanded]);
 
@@ -91,7 +105,7 @@ const History = ({ stateName }) => {
         style={{
           backgroundImage: `url(${aboutPattern})`,
           filter:
-            'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
+            "brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)",
         }}
       ></div>
       <div
@@ -99,12 +113,17 @@ const History = ({ stateName }) => {
         style={{
           backgroundImage: `url(${aboutPattern})`,
           filter:
-            'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
+            "brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)",
         }}
       ></div>
 
-      <h2 className="text-4xl font-bold text-[#6b4226] mb-8">History of {stateName}</h2>
-      <p className="text-lg text-[#8c6239] mb-6 max-w-5xl mx-auto text-justify">{displayedContent}</p>
+      <h2 className="text-4xl font-bold text-[#6b4226] mb-8">
+        History of {formattedStateName}
+      </h2>
+      <div
+        className="text-lg text-[#8c6239] mb-6 max-w-5xl mx-auto text-justify pointer-events-none"
+        dangerouslySetInnerHTML={{ __html: displayedContent }}
+      ></div>
       {content.length > 300 && (
         <button
           onClick={toggleReadMore}

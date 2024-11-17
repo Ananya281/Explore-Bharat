@@ -1,30 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import './Geography.css'; // Ensure this file is correctly linked in the component
-import aboutPattern from '../assets/images/about.svg'; // Ensure the path and file name are correct
+import React, { useEffect, useState } from "react";
+import "./Geography.css"; // Ensure this file is correctly linked
+import aboutPattern from "../assets/images/about.svg"; // Ensure the path and file name are correct
 
 const Geography = ({ stateName }) => {
   const [content, setContent] = useState("Loading Geographical information...");
   const [isExpanded, setIsExpanded] = useState(false);
   const [displayedContent, setDisplayedContent] = useState("");
 
-  useEffect(() => {
-    console.log('stateName:', stateName); // Log to check if stateName is passed correctly
+  // Helper function to format the state name
+  const formatStateName = (name) => {
+    return name
+      .replace(/_/g, " ") // Replace underscores with spaces
+      .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize each word
+  };
 
+  const formattedStateName = stateName ? formatStateName(stateName) : "";
+
+  useEffect(() => {
     if (!stateName) {
       setContent("No place specified.");
-      return; // Prevent fetch if no stateName is provided
+      return;
     }
 
-    const formattedStateName = stateName
-      .replace(/([a-z])([A-Z])/g, '$1 $2') // Add space between camel-case words like TamilNadu
-      .replace(/_/g, ' '); // Replace underscores with spaces (if any)
-
-    const fetchGeography = async () => {
+    const fetchGeographySection = async () => {
       try {
         const response = await fetch(
-          `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Climate_of_${encodeURIComponent(
-            formattedStateName
-          )}&exintro=&explaintext=&origin=*`
+          `https://en.wikipedia.org/api/rest_v1/page/html/${encodeURIComponent(
+            stateName
+          )}`
         );
 
         if (!response.ok) {
@@ -32,30 +35,60 @@ const Geography = ({ stateName }) => {
           return;
         }
 
-        const data = await response.json();
-        const page = data.query.pages;
-        const pageContent = page[Object.keys(page)[0]]?.extract;
+        const htmlText = await response.text();
 
-        if (pageContent) {
-          setContent(pageContent);
+        // Parse the HTML and extract the "Geography" section
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText, "text/html");
+        const geographyHeader = Array.from(
+          doc.querySelectorAll("h2, h3")
+        ).find((header) =>
+          header.textContent.toLowerCase().includes("geography")
+        );
+
+        if (geographyHeader) {
+          const geographyContent = [];
+          let nextSibling = geographyHeader.nextElementSibling;
+          while (nextSibling && nextSibling.tagName !== "H2") {
+            geographyContent.push(nextSibling.outerHTML);
+            nextSibling = nextSibling.nextElementSibling;
+          }
+
+          // Join the extracted content
+          let fullContent = geographyContent.join("");
+
+          // Filter content (if necessary)
+          const tempDiv = document.createElement("div");
+          tempDiv.innerHTML = fullContent;
+
+          const paragraphs = Array.from(tempDiv.querySelectorAll("p"));
+          const filteredContent = paragraphs
+            .slice(0) // Modify slicing as needed
+            .map((el) => el.outerHTML)
+            .join("");
+
+          setContent(
+            filteredContent || "No detailed Geographical information available."
+          );
         } else {
-          setContent("No Geographical information available.");
+          setContent("No Geography section found.");
         }
       } catch (error) {
-        console.error('Error fetching Geographical information:', error);
+        console.error("Error fetching Geographical section:", error);
         setContent("Failed to load Geographical information.");
       }
     };
 
-    fetchGeography();
-  }, [stateName]); // Re-run effect whenever stateName changes
+    fetchGeographySection();
+  }, [stateName]);
 
   useEffect(() => {
-    // Display truncated or full content based on the expansion state
     if (isExpanded) {
       setDisplayedContent(content);
     } else {
-      setDisplayedContent(content.substring(0, 300) + (content.length > 300 ? "..." : ""));
+      setDisplayedContent(
+        content.substring(0, 2400) + (content.length > 200 ? "..." : "")
+      );
     }
   }, [content, isExpanded]);
 
@@ -64,14 +97,14 @@ const Geography = ({ stateName }) => {
   };
 
   return (
-    <section className="relative geography-section py-16 bg-[#f3ece4] text-center overflow-hidden">
+    <section className="relative history-section py-16 bg-[#f3ece4] text-center overflow-hidden">
       {/* Decorative Flowers */}
       <div
         className="absolute top-35 left-0 w-40 h-40 opacity-20 bg-no-repeat bg-contain"
         style={{
           backgroundImage: `url(${aboutPattern})`,
           filter:
-            'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
+            "brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)",
         }}
       ></div>
       <div
@@ -79,12 +112,17 @@ const Geography = ({ stateName }) => {
         style={{
           backgroundImage: `url(${aboutPattern})`,
           filter:
-            'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
+            "brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)",
         }}
       ></div>
 
-      <h2 className="text-4xl font-bold text-[#6b4226] mb-8">Geography of {stateName}</h2>
-      <p className="text-lg text-[#8c6239] mb-6 max-w-5xl mx-auto text-justify">{displayedContent}</p>
+      <h2 className="text-4xl font-bold text-[#6b4226] mb-8">
+        Geography of {formattedStateName}
+      </h2>
+      <div
+        className="text-lg text-[#8c6239] mb-6 max-w-5xl mx-auto text-justify pointer-events-none"
+        dangerouslySetInnerHTML={{ __html: displayedContent }}
+      ></div>
       {content.length > 300 && (
         <button
           onClick={toggleReadMore}

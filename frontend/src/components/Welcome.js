@@ -43,6 +43,8 @@ const Welcome = ({ placeName, description }) => {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
+        marginTop:0,
+        paddingTop:0,
       }}
     >
       {/* Black overlay */}

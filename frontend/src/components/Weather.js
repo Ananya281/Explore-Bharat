@@ -4,7 +4,7 @@ import './Weather.css'; // Ensure this file exists for styling
 const Weather = ({ stateName }) => {
   const [weatherData, setWeatherData] = useState(null); // State to store weather data
   const [loading, setLoading] = useState(true); // State to track loading
-  const [error, setError] = useState(null); // State to handle errors
+  const [error, setError] = useState(false); // State to handle errors
 
   const API_KEY = 'EKrOrmCDqUPS1I2aqAu9LL7MkVOXXHMs'; // Replace with your actual API key
 
@@ -12,7 +12,7 @@ const Weather = ({ stateName }) => {
     const fetchWeather = async () => {
       try {
         setLoading(true); // Start loading
-        setError(null); // Reset error state
+        setError(false); // Reset error state
 
         const url = `https://api.tomorrow.io/v4/weather/realtime?location=${encodeURIComponent(
           stateName
@@ -27,7 +27,7 @@ const Weather = ({ stateName }) => {
         const data = await response.json();
         setWeatherData(data); // Store the response data
       } catch (err) {
-        setError(err.message); // Capture error message
+        setError(true); // Set error state if fetch fails
       } finally {
         setLoading(false); // End loading
       }
@@ -38,12 +38,13 @@ const Weather = ({ stateName }) => {
     }
   }, [stateName]);
 
-  if (loading) {
-    return <div className="weather-section">Loading weather data...</div>;
+  if (error || !stateName) {
+    // Don't render the component if there's an error or stateName is undefined
+    return null;
   }
 
-  if (error) {
-    return <div className="weather-section">Error: {error}</div>;
+  if (loading) {
+    return <div className="weather-section">Loading weather data...</div>;
   }
 
   // Safely access weather data
