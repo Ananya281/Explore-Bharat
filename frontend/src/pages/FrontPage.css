@@ -1,0 +1,36 @@
+.front-page {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f3ece4;
+  }
+  
+  .bg-pattern {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.2;
+  }
+  
+  .front-page-buttons button {
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+  
+  .front-page-buttons button:hover {
+    transform: scale(1.05);
+  }
+  
+  .front-page-buttons button:active {
+    transform: scale(0.95);
+  }
+  

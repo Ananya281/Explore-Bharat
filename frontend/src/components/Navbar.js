@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link as ScrollLink } from 'react-scroll'; // For smooth scrolling on HomePage
-import { Link as RouterLink, useLocation } from 'react-router-dom';  // For routing and detecting location
+import { Link as ScrollLink } from 'react-scroll';
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
   const [navbarScrolled, setNavbarScrolled] = useState(false);
 
@@ -22,6 +23,13 @@ const Navbar = () => {
     };
   }, []);
 
+  const handleLogout = () => {
+    setIsLoggedIn(false); // Clear login state
+    navigate('/'); // Redirect to homepage
+  };
+
+  console.log('isLoggedIn in Navbar:', isLoggedIn); // Debugging
+
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition duration-300 ${
@@ -29,34 +37,37 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto flex justify-between items-center py-4">
-        
         {/* Left Section: Navigation Links */}
-        <ul className={`ml-8 flex space-x-6 ${navbarScrolled ? 'text-[#6b4226]' : 'text-white'}`}>
+        <ul
+          className={`ml-8 flex space-x-6 ${
+            navbarScrolled ? 'text-[#6b4226]' : 'text-white'
+          }`}
+        >
           {isHomePage ? (
             <>
               <li>
-                <ScrollLink 
-                  to="hero" 
-                  smooth={true} 
-                  duration={500} 
+                <ScrollLink
+                  to="hero"
+                  smooth={true}
+                  duration={500}
                   className="transform transition-transform duration-200 hover:scale-105 hover:underline cursor-pointer"
                 >
                   Home
                 </ScrollLink>
               </li>
               <li>
-                <RouterLink 
-                  to="/about" 
+                <RouterLink
+                  to="/about"
                   className="transform transition-transform duration-200 hover:scale-105 hover:underline"
                 >
                   About
                 </RouterLink>
               </li>
               <li>
-                <ScrollLink 
-                  to="map" 
-                  smooth={true} 
-                  duration={500} 
+                <ScrollLink
+                  to="map"
+                  smooth={true}
+                  duration={500}
                   className="transform transition-transform duration-200 hover:scale-105 hover:underline cursor-pointer"
                 >
                   Map
@@ -66,45 +77,59 @@ const Navbar = () => {
           ) : (
             <>
               <li>
-                <RouterLink to="/" className="transform transition-transform duration-200 hover:scale-105 hover:underline">
+                <RouterLink
+                  to="/"
+                  className="transform transition-transform duration-200 hover:scale-105 hover:underline"
+                >
                   Home
                 </RouterLink>
               </li>
               <li>
-                <RouterLink to="/about" className="transform transition-transform duration-200 hover:scale-105 hover:underline">
+                <RouterLink
+                  to="/about"
+                  className="transform transition-transform duration-200 hover:scale-105 hover:underline"
+                >
                   About
                 </RouterLink>
               </li>
             </>
           )}
-          
-          {/* Contact and Feedback Links available across all pages */}
+
+          {/* Contact and Feedback Links */}
           <li>
-            <RouterLink to="/contact" className="transform transition-transform duration-200 hover:scale-105 hover:underline">
+            <RouterLink
+              to="/contact"
+              className="transform transition-transform duration-200 hover:scale-105 hover:underline"
+            >
               Contact
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="/feedback" className="transform transition-transform duration-200 hover:scale-105 hover:underline">
+            <RouterLink
+              to="/feedback"
+              className="transform transition-transform duration-200 hover:scale-105 hover:underline"
+            >
               Feedback
             </RouterLink>
           </li>
         </ul>
 
-        {/* Right Section: Login Button */}
-        <RouterLink
-          to="/login"
-          className={`px-6 py-2 rounded-lg transition duration-300 mr-10 ${
-            navbarScrolled 
-              ? 'bg-[#6b4226] text-[#f3ece4] hover:bg-[#a07850]'
-              : 'bg-transparent text-white border border-white hover:bg-white hover:text-[#6b4226]'
-          }`}
-        >
-          Login
-        </RouterLink>
+        {/* Right Section: Logout Button */}
+        {isLoggedIn && (
+          <button
+            onClick={handleLogout}
+            className={`px-6 py-2 rounded-lg transition duration-300 mr-10 ${
+              navbarScrolled
+                ? 'bg-[#6b4226] text-[#f3ece4] hover:bg-[#a07850]'
+                : 'bg-transparent text-white border border-white hover:bg-white hover:text-[#6b4226]'
+            }`}
+          >
+            Logout
+          </button>
+        )}
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;

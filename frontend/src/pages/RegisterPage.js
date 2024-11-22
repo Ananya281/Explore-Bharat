@@ -2,24 +2,54 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import aboutPattern from '../assets/images/about.svg'; // Import SVG decoration
+import aboutPattern from '../assets/images/about.svg';
 
-const RegisterPage = () => {
+const RegisterPage = ({ setIsLoggedIn }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  // Email validation function
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  // Password validation function
+  const validatePassword = (password) => {
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    return (
+      password.length >= minLength &&
+      hasUpperCase &&
+      hasLowerCase &&
+      hasNumber &&
+      hasSpecialChar
+    );
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const userData = {
-      firstName,
-      lastName,
-      email,
-      password,
-    };
+    // Validate Email
+    if (!validateEmail(email)) {
+      toast.error('Invalid email format.', { position: 'top-center' });
+      return;
+    }
+
+    // Validate Password
+    if (!validatePassword(password)) {
+      toast.error(
+        'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.',
+        { position: 'top-center' }
+      );
+      return;
+    }
+
+    const userData = { firstName, lastName, email, password };
 
     try {
       const response = await fetch('http://localhost:5000/api/auth/register', {
@@ -33,16 +63,14 @@ const RegisterPage = () => {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(`Welcome ${firstName}!`, {
+        toast.success(`Welcome ${firstName}! Your account has been created successfully.`, {
           position: 'top-center',
-          autoClose: 3000,
+          autoClose: 2000,
         });
-
-        setTimeout(() => {
-          navigate('/');
-        }, 2000);
+        setIsLoggedIn(true);
+        navigate('/home');
       } else {
-        toast.error(data.message || 'Error registering user', {
+        toast.error(data.message || 'Error registering user. Please try again.', {
           position: 'top-center',
         });
       }
@@ -56,7 +84,7 @@ const RegisterPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f3ece4] relative">
-      {/* Decorative Pattern */}
+      {/* Decorative Patterns */}
       <div
         className="absolute top-0 left-0 w-48 h-48 opacity-20 bg-no-repeat bg-contain"
         style={{
@@ -75,9 +103,8 @@ const RegisterPage = () => {
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md relative z-10">
         <h2 className="text-3xl font-bold text-center mb-4 text-[#6b4226]">Create New Account</h2>
 
-        <ToastContainer /> {/* Toast container for displaying toasts */}
+        <ToastContainer />
 
-        {/* Register Form */}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <input
@@ -118,7 +145,7 @@ const RegisterPage = () => {
             />
           </div>
 
-          <div className="mb-6 relative">
+          <div className="mb-6">
             <input
               type="password"
               id="password"
@@ -129,6 +156,9 @@ const RegisterPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <small className="text-gray-500">
+              Password must be at least 8 characters long and include an uppercase letter, lowercase letter, number, and special character.
+            </small>
           </div>
 
           <button

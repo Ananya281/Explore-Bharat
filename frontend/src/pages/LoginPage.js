@@ -2,22 +2,40 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import aboutPattern from '../assets/images/about.svg'; // Import the SVG decoration
+import aboutPattern from '../assets/images/about.svg'; // Import SVG decoration
 
-const LoginPage = () => {
+const LoginPage = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
 
+  // Email validation function
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
+    // Validate email
+    if (!validateEmail(email)) {
+      toast.error('Invalid email format. Please enter a valid email.', {
+        position: 'top-center',
+      });
+      return;
+    }
+
+    // Check password length
+    if (password.length < 6) {
+      toast.error('Password must be at least 6 characters long.', {
+        position: 'top-center',
+      });
+      return;
+    }
+
     const userData = { email, password };
-  
+
     try {
-      console.log('Sending login request:', userData);
-  
       const response = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
         headers: {
@@ -25,37 +43,44 @@ const LoginPage = () => {
         },
         body: JSON.stringify(userData),
       });
-  
+
       const data = await response.json();
-      console.log('Response status:', response.status);
-      console.log('Response data:', data);
-  
+      console.log('API Response:', data); // Debugging
+
+
       if (response.ok) {
-        toast.success(`Welcome back!`, {
+        // Success notification
+        toast.success('Login successful! Redirecting...', {
           position: 'top-center',
-          autoClose: 3000,
+          autoClose: 2000,
         });
-  
+
+        // Save user session
+        const storage = rememberMe ? localStorage : sessionStorage;
+        storage.setItem('user', JSON.stringify(data));
+
+        setIsLoggedIn(true);
+
         setTimeout(() => {
-          navigate('/');
-        }, 3000);
+          navigate('/home'); // Redirect to HomePage
+        }, 2000);
       } else {
-        toast.error(data.message || 'Invalid login credentials', {
+        // Error notification
+        toast.error(data.message || 'Invalid credentials. Please try again.', {
           position: 'top-center',
         });
       }
     } catch (error) {
-      console.error('Error:', error);
-      toast.error('An error occurred. Please try again later.', {
+      console.error('Login Error:', error);
+      toast.error('Something went wrong. Please try again later.', {
         position: 'top-center',
       });
     }
   };
-  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f3ece4] relative">
-      {/* Decorative Pattern */}
+      {/* Background Decoration */}
       <div
         className="absolute top-0 left-0 w-48 h-48 opacity-20 bg-no-repeat bg-contain"
         style={{
@@ -71,41 +96,49 @@ const LoginPage = () => {
         }}
       ></div>
 
+      {/* Login Form */}
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md relative z-10">
-        <h2 className="text-3xl font-bold text-center mb-2 text-[#6b4226]">Welcome back!</h2>
-        <p className="text-center text-[#8c6239] mb-6">Enter to get unlimited access to data & information.</p>
+        <h2 className="text-3xl font-bold text-center mb-4 text-[#6b4226]">Welcome Back!</h2>
+        <p className="text-center text-[#8c6239] mb-6">Sign in to access unlimited information.</p>
 
-        <ToastContainer /> {/* For displaying toasts */}
+        <ToastContainer />
 
         <form onSubmit={handleSubmit}>
+          {/* Email Input */}
           <div className="mb-4">
-            <label htmlFor="email" className="block text-[#6b4226] mb-2">Email <span className="text-red-500">*</span></label>
+            <label htmlFor="email" className="block text-[#6b4226] mb-2">
+              Email <span className="text-red-500">*</span>
+            </label>
             <input
               type="email"
               id="email"
               name="email"
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8c6239]"
-              placeholder="Enter your mail address"
+              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
 
-          <div className="mb-4 relative">
-            <label htmlFor="password" className="block text-[#6b4226] mb-2">Password <span className="text-red-500">*</span></label>
+          {/* Password Input */}
+          <div className="mb-4">
+            <label htmlFor="password" className="block text-[#6b4226] mb-2">
+              Password <span className="text-red-500">*</span>
+            </label>
             <input
               type="password"
               id="password"
               name="password"
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8c6239]"
-              placeholder="Enter password"
+              placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
 
+          {/* Remember Me & Forgot Password */}
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center">
               <input
@@ -115,11 +148,16 @@ const LoginPage = () => {
                 checked={rememberMe}
                 onChange={() => setRememberMe(!rememberMe)}
               />
-              <label htmlFor="rememberMe" className="ml-2 text-[#6b4226]">Remember me</label>
+              <label htmlFor="rememberMe" className="ml-2 text-[#6b4226]">
+                Remember me
+              </label>
             </div>
-            <Link to="/forgot-password" className="text-[#8c6239] hover:underline">Forgot your password?</Link>
+            <Link to="/forgot-password" className="text-[#8c6239] hover:underline">
+              Forgot password?
+            </Link>
           </div>
 
+          {/* Login Button */}
           <button
             type="submit"
             className="w-full bg-[#6b4226] text-white p-3 rounded-lg hover:bg-[#8c6239] transition duration-300"
@@ -127,9 +165,12 @@ const LoginPage = () => {
             Log In
           </button>
 
+          {/* Redirect to Register */}
           <div className="text-center mt-6">
-            <span className="text-[#6b4226]">Don’t have an account? </span>
-            <Link to="/register" className="text-[#8c6239] hover:underline">Register here</Link>
+            <span className="text-[#6b4226]">New here? </span>
+            <Link to="/register" className="text-[#8c6239] hover:underline">
+              Create an account
+            </Link>
           </div>
         </form>
       </div>

@@ -9,6 +9,11 @@ router.post('/register', async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
   try {
+    // Validate required fields
+    if (!firstName || !lastName || !email || !password) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
     // Check if the user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -26,51 +31,45 @@ router.post('/register', async (req, res) => {
       password: hashedPassword,
     });
 
-    // Save the user to the database and check for success
+    // Save the user to the database
     const savedUser = await user.save();
 
-    if (!savedUser) {
-      return res.status(500).json({ message: 'Failed to save user in the database' });
-    }
-
-    console.log('User saved in the database:', savedUser);
+    console.log('User saved successfully:', savedUser.email);
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
-    console.error('Error in registration:', err);
-    res.status(500).json({ message: 'Server error', error: err });
+    console.error('Error in registration route:', err);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
+// Login route
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    console.log('Received login request with email:', email); // Log the request
+    // Validate required fields
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
+    }
 
     // Check if the user exists
     const user = await User.findOne({ email });
     if (!user) {
-      console.log('User not found');
       return res.status(400).json({ message: 'User does not exist' });
     }
-
-    console.log('User found:', user.email);
 
     // Compare the password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      console.log('Invalid password for user:', user.email);
-      return res.status(400).json({ message: 'Invalid password' });
+      return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    console.log('Password matches. Login successful.');
-    return res.status(200).json({ message: 'Login successful', user });
+    console.log('User logged in successfully:', user.email);
+    res.status(200).json({ message: 'Login successful', user });
   } catch (err) {
     console.error('Error in login route:', err);
-    return res.status(500).json({ message: 'Server error', error: err });
+    res.status(500).json({ message: 'Server error' });
   }
 });
-
-
 
 module.exports = router;
