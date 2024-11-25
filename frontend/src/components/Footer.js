@@ -2,6 +2,7 @@ import React from 'react';
 import './Footer.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTwitter, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+import { Link } from 'react-router-dom';
 import aboutPattern from '../assets/images/about.svg'; // Import the SVG decoration
 
 const Footer = () => {
@@ -50,36 +51,32 @@ const Footer = () => {
         <div>
           <h3 className="font-bold text-xl mb-4 lg:mb-6">Useful Links</h3>
           <ul className="space-y-3 text-lg">
-            <li><a href="/" className="hover:text-[#8c6239] transition duration-300">Home</a></li>
-            <li><a href="/About" className="hover:text-[#8c6239] transition duration-300">About</a></li>
-            <li><a href="/" className="hover:text-[#8c6239] transition duration-300">Map</a></li>
-            <li><a href="/Contact" className="hover:text-[#8c6239] transition duration-300">Contact</a></li>
-            <li><a href="/Feedback" className="hover:text-[#8c6239] transition duration-300">Feedback</a></li>
+            <li><Link to="/home" className="hover:text-[#8c6239] transition duration-300">Home</Link></li>
+            <li><Link to="/about" className="hover:text-[#8c6239] transition duration-300">About</Link></li>
+            <li><Link to="/home#map" className="hover:text-[#8c6239] transition duration-300">Map</Link></li>
+            <li><Link to="/contact" className="hover:text-[#8c6239] transition duration-300">Contact</Link></li>
+            <li><Link to="/feedback" className="hover:text-[#8c6239] transition duration-300">Feedback</Link></li>
           </ul>
         </div>
 
         {/* Support Links Section */}
-<div>
-  <h3 className="font-bold text-xl mb-4 lg:mb-6">Support Links</h3>
-  <ul className="space-y-3 text-lg">
-    <li><a href="/festivals" className="hover:text-[#8c6239] transition duration-300">Festivals</a></li>
-    <li><a href="/monuments" className="hover:text-[#8c6239] transition duration-300">Monuments</a></li>
-    <li><a href="/art-and-crafts" className="hover:text-[#8c6239] transition duration-300">Art and Crafts</a></li>
-    <li><a href="/cuisine" className="hover:text-[#8c6239] transition duration-300">Cuisine</a></li>
-  </ul>
-</div>
-
+        <div>
+          <h3 className="font-bold text-xl mb-4 lg:mb-6">Support Links</h3>
+          <ul className="space-y-3 text-lg">
+            <li><Link to="/festivals" className="hover:text-[#8c6239] transition duration-300">Festivals</Link></li>
+            <li><Link to="/monuments" className="hover:text-[#8c6239] transition duration-300">Monuments</Link></li>
+            <li><Link to="/art-and-crafts" className="hover:text-[#8c6239] transition duration-300">Art and Crafts</Link></li>
+            <li><Link to="/cuisine" className="hover:text-[#8c6239] transition duration-300">Cuisine</Link></li>
+          </ul>
+        </div>
 
         {/* Contact Information Section */}
-{/* Contact Information Section */}
-<div>
-  <h3 className="font-bold text-xl mb-4 lg:mb-6">Reach Us</h3>
-  <p className="text-lg mb-2">123 ABC Street, City Name, Country, India</p>
-  <p className="text-lg mt-4">contact@explorebharat.com</p>
-  <p className="text-lg mt-4">(000) 123-4567</p>
-</div>
-
-
+        <div>
+          <h3 className="font-bold text-xl mb-4 lg:mb-6">Reach Us</h3>
+          <p className="text-lg mb-2">123 ABC Street, City Name, Country, India</p>
+          <p className="text-lg mt-4">contact@explorebharat.com</p>
+          <p className="text-lg mt-4">(000) 123-4567</p>
+        </div>
       </div>
 
       {/* Copyright */}

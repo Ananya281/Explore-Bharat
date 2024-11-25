@@ -36,6 +36,9 @@ const App = () => {
     '/state/:stateName',
   ];
 
+  // Paths where the Footer should NOT be displayed
+  const noFooterPaths = ['/', '/login', '/register'];
+
   return (
     <>
       {/* Conditionally render Navbar for specified paths */}
@@ -82,7 +85,7 @@ const App = () => {
       </Routes>
 
       {/* Conditionally render Footer */}
-      {isLoggedIn && <Footer />}
+      {!noFooterPaths.includes(location.pathname) && <Footer />}
     </>
   );
 };

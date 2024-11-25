@@ -45,15 +45,13 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
         >
           {isHomePage ? (
             <>
-              <li>
-                <ScrollLink
-                  to="hero"
-                  smooth={true}
-                  duration={500}
-                  className="transform transition-transform duration-200 hover:scale-105 hover:underline cursor-pointer"
+            <li>
+                <RouterLink
+                  to="/home"
+                  className="transform transition-transform duration-200 hover:scale-105 hover:underline"
                 >
                   Home
-                </ScrollLink>
+                </RouterLink>
               </li>
               <li>
                 <RouterLink
@@ -78,7 +76,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             <>
               <li>
                 <RouterLink
-                  to="/"
+                  to="/home"
                   className="transform transition-transform duration-200 hover:scale-105 hover:underline"
                 >
                   Home

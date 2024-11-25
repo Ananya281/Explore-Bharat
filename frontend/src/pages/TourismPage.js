@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import Welcome from '../components/Welcome';
 import History from '../components/History';
 import Culture from '../components/Culture';
-import PlacesToVisit from '../components/PlacesToVisit';
 
 const TourismPage = () => {
   const location = useLocation();
@@ -17,7 +16,6 @@ const TourismPage = () => {
       {/* Pass predictedClass as stateName for History */}
       <History stateName={predictedClass} />
       <Culture stateName={predictedClass} />
-      <PlacesToVisit placeName={predictedClass} />
     </div>
   );
 };

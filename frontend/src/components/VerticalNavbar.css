@@ -52,6 +52,11 @@
   margin: 10px 0;
 }
 
+.navbar-link
+{
+  font-weight: bold;
+}
+
 .vertical-navbar a {
   text-decoration: none;
   color: #fff;
