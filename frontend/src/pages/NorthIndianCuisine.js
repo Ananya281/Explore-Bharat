@@ -1,9 +1,10 @@
 import React from 'react';
-import CuisineHero from '../components/CuisineHero';
-import CuisineAbout from '../components/CuisineAbout';
-import CuisineGrid from '../components/CuisineGrid';
-import CuisineRecipy from '../components/CuisineRecipy';
-import northIndianCuisineImage from '../assets/images/northIndianCuisine.jpeg';
+import CuisineHero from '../components/CuisineHero'; // Hero component
+import CuisineAbout from '../components/CuisineAbout'; // About section component
+import CuisineGrid from '../components/CuisineGrid'; // Grid component
+import CuisineRecipy from '../components/CuisineRecipy'; // Recipe component
+import northIndianCuisineImage from '../assets/images/northIndianCuisine.jpeg'; // Hero image
+import cuisinePattern from '../assets/images/about.svg'; // Decorative SVG pattern
 
 const NorthIndianCuisine = () => {
   const aboutParagraphs = [
@@ -37,14 +38,55 @@ const NorthIndianCuisine = () => {
   ];
 
   return (
-    <div>
+    <div className="relative bg-[#f3ece4]">
+      {/* Decorative Patterns */}
+      <div
+        className="absolute top-0 left-0 w-48 h-48 opacity-20 bg-no-repeat bg-contain"
+        style={{
+          backgroundImage: `url(${cuisinePattern})`,
+          filter: 'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
+        }}
+      ></div>
+      <div
+        className="absolute bottom-0 right-0 w-48 h-48 opacity-20 bg-no-repeat bg-contain"
+        style={{
+          backgroundImage: `url(${cuisinePattern})`,
+          filter: 'brightness(0) saturate(100%) invert(58%) sepia(31%) saturate(2164%) hue-rotate(2deg) brightness(92%) contrast(89%)',
+        }}
+      ></div>
+
+      {/* Hero Section */}
       <CuisineHero 
         imageSrc={northIndianCuisineImage} 
-        title="North Indian Cuisine"
+        title="North Indian Cuisine" 
       />
-      <CuisineAbout paragraphs={aboutParagraphs} />
-      <CuisineGrid gridItems={gridItems} />
-      <CuisineRecipy recipies={recipies} />
+
+      {/* About Section */}
+      <section className="py-20 px-6 lg:px-12 text-center relative z-10">
+        <h2 className="text-5xl font-bold text-[#6b4226] font-serif mb-6">
+          Explore <span className="italic text-[#8c6239]">North Indian Cuisine</span>
+        </h2>
+        <div className="flex justify-center mb-6">
+          <hr className="border-t-2 border-[#8c6239] w-32" />
+        </div>
+        <CuisineAbout paragraphs={aboutParagraphs} />
+      </section>
+
+      {/* Grid Section */}
+      <section className="py-10 px-6 lg:px-12">
+        <h2 className="text-3xl font-semibold text-center text-[#6b4226] mb-6">
+          Signature Dishes
+        </h2>
+        <CuisineGrid gridItems={gridItems} />
+      </section>
+
+      {/* Recipe Section */}
+      <section className="py-10 px-6 lg:px-12 bg-[#f8f4ee]">
+        <h2 className="text-3xl font-semibold text-center text-[#6b4226] mb-6">
+          Famous Recipes
+        </h2>
+        <CuisineRecipy recipies={recipies} />
+      </section>
     </div>
   );
 };
