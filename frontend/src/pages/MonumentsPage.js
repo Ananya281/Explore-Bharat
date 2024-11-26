@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CardsHero from '../components/CardHero'; // Adjust the path if necessary
 import HexagonGallery from '../components/HexagonGallery'; // Import the HexagonGallery component
 import monumentsVideo from '../assets/videos/monuments.mp4'; // Import the monuments video
 
-// Import images for monument cards
-import tajMahalImage from '../assets/images/tajmahal.jpeg';
-import goldenTempleImage from '../assets/images/goldentemple.jpeg';
-import hawaMahalImage from '../assets/images/hawamahal.jpeg';
-import agraFortImage from '../assets/images/agrafort.jpeg';
+// Import images for monument categories
+import ancientFortImage from '../assets/images/ancientfort.jpeg';
+import religiousMonumentImage from '../assets/images/religiousmonument.jpeg';
+import architecturalWonderImage from '../assets/images/architecturalwonder.jpeg';
+import heritageSiteImage from '../assets/images/heritagesite.jpeg';
 
 // Dynamically import images for HexagonGallery
 const hexagonImages = [
@@ -20,26 +21,30 @@ const hexagonImages = [
   require('../assets/images/image-monuments/mon7.jpeg'),
 ];
 
-const monumentData = [
+const monumentTypes = [
   {
-    title: "Taj Mahal",
-    description: "Located in Agra, this stunning marble mausoleum is a UNESCO World Heritage site and one of the Seven Wonders of the World.",
-    image: tajMahalImage,
+    title: "Ancient Forts",
+    description: "Explore the grandeur of India's ancient forts that narrate tales of valiant kings and empires.",
+    image: ancientFortImage,
+    link: "/ancient-forts", // Example link for the category
   },
   {
-    title: "Golden Temple",
-    description: "Located in Amritsar, the Golden Temple is a significant Sikh shrine known for its beautiful golden architecture and spiritual importance.",
-    image: goldenTempleImage,
+    title: "Religious Monuments",
+    description: "Discover the spiritual essence of India's iconic religious monuments.",
+    image: religiousMonumentImage,
+    link: "/religious-monuments", // Example link for the category
   },
   {
-    title: "Hawa Mahal",
-    description: "Located in Jaipur, Hawa Mahal is known for its unique five-story facade and numerous windows that allow cool air to circulate throughout.",
-    image: hawaMahalImage,
+    title: "Architectural Wonders",
+    description: "Marvel at India's architectural wonders, showcasing intricate designs and timeless beauty.",
+    image: architecturalWonderImage,
+    link: "/architectural-wonders", // Example link for the category
   },
   {
-    title: "Agra Fort",
-    description: "This massive fort in Agra served as the main residence of the Mughal emperors and is a UNESCO World Heritage Site.",
-    image: agraFortImage,
+    title: "Heritage Sites",
+    description: "Step into the rich history and culture preserved in India's heritage sites.",
+    image: heritageSiteImage,
+    link: "/heritage-sites", // Example link for the category
   },
 ];
 
@@ -63,23 +68,24 @@ const MonumentsPage = () => {
           These monuments have stood the test of time, showcasing unique architectural styles and intricate craftsmanship. Each structure holds cultural, spiritual, and historical significance, making them popular tourist destinations for people around the world. Discover India's rich heritage through these remarkable monuments.
         </p>
 
-        {/* Monument Cards */}
+        {/* Monument Types Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {monumentData.map((monument, index) => (
-            <div 
+          {monumentTypes.map((type, index) => (
+            <Link 
+              to={type.link} 
               key={index} 
               className="relative rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 group"
             >
               <img 
-                src={monument.image} 
-                alt={monument.title} 
+                src={type.image} 
+                alt={type.title} 
                 className="w-full h-64 object-cover group-hover:brightness-75 transition duration-300"
               />
               <div className="absolute bottom-0 left-0 right-0 p-4 bg-black bg-opacity-50 text-white transition-opacity duration-300 opacity-0 group-hover:opacity-100">
-                <h2 className="text-xl font-semibold">{monument.title}</h2>
-                <p className="text-sm mt-1">{monument.description}</p>
+                <h2 className="text-xl font-semibold">{type.title}</h2>
+                <p className="text-sm mt-1">{type.description}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

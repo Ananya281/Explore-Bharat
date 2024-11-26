@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CardsHero from '../components/CardHero';
 import HexagonGallery from '../components/HexagonGallery'; // Import the HexagonGallery component
 import festivalsVideo from '../assets/videos/festivals.mp4';
@@ -25,21 +26,25 @@ const festivalData = [
     title: "Pan Indian Festivals",
     description: "Discover the vibrant celebrations uniting communities across India",
     image: panFestivalImage,
+    link: "/pan-indian-festival", // Link to the respective page
   },
   {
     title: "Folk Festivals",
     description: "Understand the unique regional customs and festivities of India",
     image: folkFestivalImage,
+    link: "/folk-festival", // Link to the respective page
   },
   {
     title: "Tribal Festivals",
     description: "Explore tales of cultural euphoria associated with nature, ancestors, and deities",
     image: tribalFestivalImage,
+    link: "/tribal-festival", // Link to the respective page
   },
   {
     title: "Fairs & Pilgrimages",
     description: "Delve into the festive extravaganzas and sacred pilgrimages",
     image: fairFestivalImage,
+    link: "/fair-festival", // Link to the respective page
   },
 ];
 
@@ -65,7 +70,8 @@ const FestivalsPage = () => {
         {/* Festival Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {festivalData.map((festival, index) => (
-            <div 
+            <Link 
+              to={festival.link} 
               key={index} 
               className="relative rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 group"
             >
@@ -78,7 +84,7 @@ const FestivalsPage = () => {
                 <h2 className="text-xl font-semibold">{festival.title}</h2>
                 <p className="text-sm mt-1">{festival.description}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
