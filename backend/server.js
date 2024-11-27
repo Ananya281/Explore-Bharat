@@ -12,12 +12,15 @@ dotenv.config();
 const app = express();
 
 // CORS Configuration
-const corsOptions = {
-  origin: ['https://explore-bharat-frontend.vercel.app'], // Add your frontend URL here
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: ['https://explore-bharat-frontend.vercel.app'], // Add your frontend URL here
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
+//   allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+// };
+app.use(cors({
+  origin:"https://explore-bharat-frontend.vercel.app",
+  credentials:"true"
+}));
 
 // Middleware to parse JSON data
 app.use(express.json());
