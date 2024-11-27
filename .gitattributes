@@ -1,3 +1,4 @@
 backend/trained_model.keras filter=lfs diff=lfs merge=lfs -text
 pyhton//trained_model.keras filter=lfs diff=lfs merge=lfs -text
 pyhton/trained_model.keras filter=lfs diff=lfs merge=lfs -text
+python/trained_model.keras filter=lfs diff=lfs merge=lfs -text
