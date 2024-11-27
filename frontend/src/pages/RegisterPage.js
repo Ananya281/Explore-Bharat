@@ -52,34 +52,35 @@ const RegisterPage = ({ setIsLoggedIn }) => {
     const userData = { firstName, lastName, email, password };
 
     try {
-      const response = await fetch('https://backend-navy-two-59.vercel.app//api/auth/register', {
+      const response = await fetch('https://backend-navy-two-59.vercel.app/api/auth/register', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json', // Keep headers minimal
         },
         body: JSON.stringify(userData),
       });
-
-      const data = await response.json();
-
+    
       if (response.ok) {
-        toast.success(`Welcome ${firstName}! Your account has been created successfully.`, {
+        const data = await response.json();
+        toast.success(`Welcome ${data.firstName || firstName}! Your account has been created successfully.`, {
           position: 'top-center',
           autoClose: 2000,
         });
         setIsLoggedIn(true);
         navigate('/home');
       } else {
-        toast.error(data.message || 'Error registering user. Please try again.', {
+        const errorData = await response.json();
+        toast.error(errorData.message || 'Error registering user. Please try again.', {
           position: 'top-center',
         });
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error:', error.message);
       toast.error('Something went wrong. Please try again later.', {
         position: 'top-center',
       });
     }
+    
   };
 
   return (

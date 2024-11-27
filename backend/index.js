@@ -20,6 +20,7 @@ const app = express();
 app.use(cors({
   origin:"https://explore-bharat-frontend.vercel.app",
   credentials:"true",
+
 }));
 
 // Middleware to parse JSON data
