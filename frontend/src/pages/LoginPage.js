@@ -36,7 +36,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
     const userData = { email, password };
 
     try {
-      const response = await fetch('https://explore-bharat.vercel.app/api/auth/login', {
+      const response = await fetch('https://backend-navy-two-59.vercel.app//api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -19,16 +19,22 @@ const app = express();
 // };
 app.use(cors({
   origin:"https://explore-bharat-frontend.vercel.app",
-  credentials:"true"
+  credentials:"true",
 }));
 
 // Middleware to parse JSON data
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.error('Could not connect to MongoDB:', err));
+const connectdb = async()=>{
+  try{
+    await mongoose.connect(process.env.MONGO_URI,{})
+  console.log('Connected to MongoDB')
+  }catch(err){
+    console.log("err")
+  }
+}
+connectdb();
 
 // Routes middleware
 app.use('/api/auth', authRoutes);
