@@ -36,31 +36,30 @@ const LoginPage = ({ setIsLoggedIn }) => {
     const userData = { email, password };
 
     try {
-      const response = await fetch('https://backend-navy-two-59.vercel.app//api/auth/login', {
+      const response = await fetch('https://backend-navy-two-59.vercel.app/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(userData),
       });
-
+    
       const data = await response.json();
       console.log('API Response:', data); // Debugging
-
-
+    
       if (response.ok) {
         // Success notification
         toast.success('Login successful! Redirecting...', {
           position: 'top-center',
           autoClose: 2000,
         });
-
+    
         // Save user session
         const storage = rememberMe ? localStorage : sessionStorage;
         storage.setItem('user', JSON.stringify(data));
-
+    
         setIsLoggedIn(true);
-
+    
         setTimeout(() => {
           navigate('/home'); // Redirect to HomePage
         }, 2000);
@@ -76,6 +75,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
         position: 'top-center',
       });
     }
+    
   };
 
   return (
