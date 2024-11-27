@@ -43,12 +43,21 @@ const handleSearchSubmit = async (e) => {
     setError(null);
 
     try {
-      const response = await axios.post('https://explore-bharat-amgr.onrender.com/predict', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const response = await axios.post(
+        'https://explore-bharat-amgr.onrender.com/predict',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          withCredentials: true, // Allow credentials (if required by your backend)
+        }
+      );
+    
       const predictedClass = response.data.predicted_class;
-
+    
       console.log("Predicted Class:", predictedClass);
+    
       if (stateNames.includes(predictedClass)) {
         navigate(`/state/${predictedClass}`);
       } else {
@@ -56,7 +65,13 @@ const handleSearchSubmit = async (e) => {
       }
     } catch (error) {
       console.error("Prediction error:", error);
-      setError("Failed to get prediction. Please try again.");
+    
+      // Handle specific CORS errors
+      if (error.response?.status === 403 || error.response?.status === 401) {
+        setError("Authorization failed. Check permissions or login status.");
+      } else {
+        setError("Failed to get prediction. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
