@@ -64,7 +64,7 @@ const handleSearchSubmit = async (e) => {
         navigate('/tourism', { state: { predictedClass } });
       }
     } catch (error) {
-      console.error("Prediction error:", error.toJSON());
+      console.error("Prediction error:", error);
       if (error.response?.status === 502) {
         setError("Backend server is unavailable. Please try again later.");
       } else if (error.message.includes("CORS")) {
@@ -88,13 +88,6 @@ const handleSearchSubmit = async (e) => {
     setError("Please upload an image or enter a search term.");
   }
 };
-
-  useEffect(() => {
-    if (error) {
-      const timer = setTimeout(() => setError(null), 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [error]);
 
   return (
     <section 
