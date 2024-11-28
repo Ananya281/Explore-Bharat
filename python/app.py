@@ -8,7 +8,7 @@ import os
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/predict": {"origins": "https://explore-bharat-frontend.vercel.app"}})
+CORS(app, resources=r'/*', origins='*')
 
 # Load the model once when the app starts
 model = tf.keras.models.load_model('trained_model.keras')
