@@ -50,7 +50,7 @@ const handleSearchSubmit = async (e) => {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
-          withCredentials: true, // Allow credentials (if required by your backend)
+          // withCredentials: true, // Allow credentials (if required by your backend)
         }
       );
     
@@ -65,10 +65,10 @@ const handleSearchSubmit = async (e) => {
       }
     } catch (error) {
       console.error("Prediction error:", error);
-    
-      // Handle specific CORS errors
-      if (error.response?.status === 403 || error.response?.status === 401) {
-        setError("Authorization failed. Check permissions or login status.");
+      if (error.response?.status === 502) {
+        setError("Backend server is unavailable. Please try again later.");
+      } else if (error.message.includes("CORS")) {
+        setError("CORS policy issue. Please contact the administrator.");
       } else {
         setError("Failed to get prediction. Please try again.");
       }
