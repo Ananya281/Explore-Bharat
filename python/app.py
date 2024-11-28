@@ -8,7 +8,7 @@ import os
 
 
 app = Flask(__name__)
-CORS(app) 
+CORS(app, resources={r"/predict": {"origins": "https://explore-bharat-frontend.vercel.app"}})
 
 # Load the model once when the app starts
 model = tf.keras.models.load_model('trained_model.keras')
@@ -313,6 +313,11 @@ def predict():
     
     except Exception as e:
         return jsonify({"error": f"Error processing image: {e}"}), 500
+
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "ok"}), 200
+
 
 if __name__ == '__main__':
     # Bind to PORT for deployment (e.g., Render, Heroku)
