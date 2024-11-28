@@ -291,6 +291,10 @@ def predict_image(image):
         print(f"Error in prediction: {e}")
         return None
 
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({"message": "Backend is running"}), 200
+
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'file' not in request.files:
